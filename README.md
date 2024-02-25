@@ -2,6 +2,10 @@
 
 ## Dependencies
 
+DataBase:
+MongoDB
+Mongoose
+
 Backend:
 
 - Node.js
