@@ -1,5 +1,15 @@
 {
-  "devDependencies": {
-    "jest": "^29.7.0"
-  }
+  "name": "personality-test",
+  "version": "1.0.0",
+  "description": "",
+  "scripts": {
+    "install": "npm run install server && npm run install-client",
+    "server": "npm run watch --prefix server",
+    "client": "npm start --prefix client",
+    "start": "npm run server & npm run client"
+  },
+  "devDependencies": {},
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
 }
