@@ -1,7 +1,7 @@
-import mongoose from "mongoose";
+import { Schema } from "mongoose";
 import answareSchema from "./answareSchema";
 
-const questionSchema = new mongoose.Schema({
+const questionSchema = new Schema({
   id: Number,
   content: String,
   answers: {

@@ -29,7 +29,9 @@
     "helmet": "^6.2.0",
     "mongodb": "^6.3.0",
     "mongoose": "^8.2.0",
+    "reflect-metadata": "^0.2.1",
     "ts-node": "^10.9.2",
+    "typedi": "^0.10.0",
     "typescript": "^5.3.3"
   },
   "devDependencies": {
