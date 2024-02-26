@@ -1,4 +1,4 @@
-export interface IAnsware {
+export interface IAnswer {
   questionId: number;
   type: string;
 }
@@ -6,5 +6,5 @@ export interface IAnsware {
 export interface IQuestion {
   id: number;
   content: string;
-  answares: IAnsware[];
+  answers: IAnswer[];
 }

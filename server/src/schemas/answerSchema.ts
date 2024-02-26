@@ -1,11 +1,11 @@
 import { Schema } from "mongoose";
 
-const answareSchema = new Schema({
-  content: String,
+const answerSchema = new Schema({
+  questionId: String,
   type: {
     type: String,
     required: true,
   },
 });
 
-export default answareSchema;
+export default answerSchema;

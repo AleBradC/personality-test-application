@@ -1,13 +1,16 @@
 import "reflect-metadata";
 import express, { Application } from "express";
-import { Container } from "typedi";
 import helmet from "helmet";
 import cors from "cors";
 import bodyParser from "body-parser";
+import { Container } from "typedi";
 import QuestionService from "./services/QuestionService";
 
+import questionRoute from "./routes/question";
+import answerRoute from "./routes/answer";
+
 const app: Application = express();
-const questionsService = Container.get(QuestionService);
+Container.set("IQuestionService", QuestionService);
 
 // Security
 app.use(helmet());
@@ -20,12 +23,8 @@ app.use(
 // Parser
 app.use(bodyParser.json());
 
-app.get("/", async (req, res) => {
-  const questions = await questionsService.getAllQuestions();
-
-  res.status(200).json({
-    result: questions,
-  });
-});
+// Routes
+app.use(questionRoute);
+app.use(answerRoute);
 
 export default app;

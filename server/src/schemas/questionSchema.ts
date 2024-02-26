@@ -1,5 +1,5 @@
 import { Schema } from "mongoose";
-import answareSchema from "./answareSchema";
+import answareSchema from "./answerSchema";
 
 const questionSchema = new Schema({
   id: Number,
