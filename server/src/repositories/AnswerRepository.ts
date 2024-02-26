@@ -10,7 +10,7 @@ import Answer from "../models/Answer";
 export default class AnswerRepository implements IAnswerRepositoryLayer {
   getAllAnswers = async (): Promise<IAnswer[]> => {
     try {
-      return await Answer.find();
+      return await Answer.find({}, { _id: 0, __v: 0 });
     } catch (error) {
       throw new CustomError(error.statusCode, error.message);
     }

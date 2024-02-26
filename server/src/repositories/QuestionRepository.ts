@@ -11,7 +11,7 @@ import CustomError from "../errorHandlers/ErrorHandler";
 export default class QuestionRepository implements IQuestionRepositoryLayer {
   getQuestions = async (): Promise<IQuestion[]> => {
     try {
-      return await Question.find();
+      return await Question.find({}, { _id: 0, __v: 0 });
     } catch (error) {
       throw new CustomError(error.statusCode, error.message);
     }
