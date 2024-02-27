@@ -6,8 +6,7 @@
     "install": "npm run install server && npm run install-client",
     "server": "npm run watch --prefix server",
     "client": "npm start --prefix client",
-    "start": "npm run server & npm run client",
-    "test": "npm run test:unit --prefix server"
+    "start": "npm run server & npm run client"
   },
   "keywords": [],
   "author": "",
