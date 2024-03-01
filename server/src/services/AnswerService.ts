@@ -11,9 +11,10 @@ export default class AnswerService implements IAnswerService {
 
   getAllAnswers = async (): Promise<IAnswer[]> => {
     try {
-      return await this.repository.getAllAnswers();
+      return await this.repository.getAnswers();
     } catch (error) {
-      throw new CustomError(error.statusCode, error.message);
+      // throw new CustomError(error.statusCode, error.message);
+      throw error;
     }
   };
 }

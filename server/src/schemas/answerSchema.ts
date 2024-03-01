@@ -4,7 +4,7 @@ const answerSchema = new Schema(
   {
     questionId: String,
     type: {
-      type: String,
+      type: String, // extrovert or introvert
       required: true,
     },
   },

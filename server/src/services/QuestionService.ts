@@ -13,7 +13,8 @@ export default class QuestionService implements IQuestionService {
     try {
       return await this.repository.getQuestions();
     } catch (error) {
-      throw new CustomError(error.statusCode, error.message);
+      // throw new CustomError(error.statusCode, error.message);
+      throw error;
     }
   };
 }
