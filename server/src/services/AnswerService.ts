@@ -13,7 +13,8 @@ export default class AnswerService implements IAnswerService {
     try {
       return await this.repository.getAnswers();
     } catch (error) {
-      throw new CustomError(error.statusCode, error.message);
+      // throw new CustomError(error.statusCode, error.message);
+      throw error;
     }
   };
 }

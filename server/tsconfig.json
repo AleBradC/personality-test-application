@@ -1,31 +1,19 @@
 {
+  "type": "module",
   "compilerOptions": {
-    "target": "es6",
-    "module": "nodenext",
-    "lib": ["dom", "es6", "es2017", "es2020", "esnext.asynciterable"],
-    "skipLibCheck": true,
-    "sourceMap": true,
-    "outDir": "./dist",
-    "removeComments": true,
-    "noImplicitAny": false,
-    "strictNullChecks": true,
-    "strictFunctionTypes": true,
-    "noImplicitThis": true,
-    "noUnusedLocals": false,
-    "noUnusedParameters": false,
-    "noImplicitReturns": false,
-    "noFallthroughCasesInSwitch": true,
-    "allowSyntheticDefaultImports": true,
-    "esModuleInterop": true,
-    "emitDecoratorMetadata": true,
+    "target": "es2016",
+    "module": "CommonJS",
     "experimentalDecorators": true,
-    "resolveJsonModule": true,
+    "emitDecoratorMetadata": true,
+    "esModuleInterop": true,
+    "forceConsistentCasingInFileNames": true,
+    "strict": true,
+    "strictPropertyInitialization": false,
+    "skipLibCheck": true,
+    "noImplicitAny": true,
+    "moduleResolution": "node",
+    "sourceMap": true,
+    "outDir": "dist",
     "baseUrl": "."
-  },
-  "ts-node": {
-    "esm": true,
-    "experimentalSpecifierResolution": "node"
-  },
-  "exclude": ["node_modules"],
-  "include": ["./src/**/*.tsx", "./src/**/*.ts"]
+  }
 }
