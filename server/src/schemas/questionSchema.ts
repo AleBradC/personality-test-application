@@ -9,8 +9,8 @@ const questionSchema = new Schema(
       type: [answerSchema],
       required: true,
     },
-  },
-  { _id: false, __v: false }
+  }
+  // { _id: false, __v: false }
 );
 
 export default questionSchema;
