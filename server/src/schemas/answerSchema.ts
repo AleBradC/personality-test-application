@@ -7,8 +7,9 @@ const answerSchema = new Schema(
       type: String, // extrovert or introvert
       required: true,
     },
-  },
-  { _id: false, __v: false }
+    _id: String,
+  }
+  // { _id: false, __v: false }
 );
 
 export default answerSchema;
