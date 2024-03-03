@@ -1,18 +1,21 @@
 import { Service, Container } from "typedi";
 
 import AnswerRepository from "../repositories/AnswerRepository";
-import { IAnswer } from "../interfaces/common";
 import IAnswerService from "../interfaces/services/IAnswerService";
 import CustomError from "../errorHandlers/ErrorHandler";
+import { IAnswer } from "../interfaces/common";
 import { STATUS_CODE } from "../utils/constants";
+import { calculateResultHandler } from "./utils";
 
 @Service()
 export default class AnswerService implements IAnswerService {
   private repository = Container.get(AnswerRepository);
 
-  getAllAnswers = async (): Promise<IAnswer[]> => {
+  getResults = async (): Promise<string> => {
     try {
-      return await this.repository.getAnswers();
+      const resultData = await this.repository.getAnswers();
+
+      return calculateResultHandler(resultData);
     } catch (error) {
       throw new CustomError(STATUS_CODE.BAD_REQUEST, (error as Error).message);
     }

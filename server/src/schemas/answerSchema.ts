@@ -1,14 +1,11 @@
 import { Schema } from "mongoose";
 
-const answerSchema = new Schema(
-  {
-    questionId: String,
-    type: {
-      type: String, // extrovert or introvert
-      required: true,
-    },
-  }
-  // { _id: false, __v: false }
-);
+const answerSchema = new Schema({
+  questionId: String,
+  type: {
+    type: String,
+    required: true,
+  },
+});
 
 export default answerSchema;

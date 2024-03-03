@@ -4,7 +4,7 @@ import { IAnswer } from "../interfaces/common";
 import IAnswerRepositoryLayer from "../interfaces/repository/IAnswerRepositoryLayer";
 import Answer from "../models/Answer";
 import CustomError from "../errorHandlers/ErrorHandler";
-import { STATUS_CODE } from "src/utils/constants";
+import { STATUS_CODE } from "../utils/constants";
 
 @Service()
 export default class AnswerRepository implements IAnswerRepositoryLayer {

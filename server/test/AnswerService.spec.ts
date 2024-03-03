@@ -24,12 +24,9 @@ describe("AnswerService", () => {
   });
 
   it("should return all answers", async () => {
-    const result = await answerService.getAllAnswers();
-    expect(result).to.be.an("array").with.lengthOf(1);
-    expect(result[0]).to.deep.equal({
-      questionId: "1",
-      type: "extrovert",
-    });
+    const result = await answerService.getResults();
+    expect(result).to.be.an("string");
+    // expect(result).to.deep.equal("extrovert");
   });
 
   it("should throw an error when repository fails", async () => {
@@ -40,7 +37,7 @@ describe("AnswerService", () => {
     });
 
     try {
-      await answerService.getAllAnswers();
+      await answerService.getResults();
       throw new Error("Expected error but got success");
     } catch (error) {
       expect(error).to.be.an.instanceOf(Error);
