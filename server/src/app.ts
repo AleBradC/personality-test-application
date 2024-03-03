@@ -1,4 +1,6 @@
 import "reflect-metadata";
+import swaggerUi from "swagger-ui-express";
+import swaggerDocument from "./swaggerDocument.json";
 import express, { Application } from "express";
 import helmet from "helmet";
 import cors from "cors";
@@ -26,5 +28,8 @@ app.use(bodyParser.json());
 // Routes
 app.use(questionRoute);
 app.use(answerRoute);
+
+// Swagger
+app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
 export default app;
