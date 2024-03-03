@@ -1,0 +1,182 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "3.0.0",
+    "title": "API DOCS",
+    "description": "Personality Test API Documentation"
+  },
+  "host": "localhost:8000",
+  "tags": [
+    {
+      "name": "Question",
+      "description": "API for questions"
+    },
+    {
+      "name": "Answer",
+      "description": "API for answers"
+    }
+  ],
+  "schemes": ["http"],
+  "consumes": ["application/json"],
+  "produces": ["application/json"],
+  "paths": {
+    "/api/question": {
+      "get": {
+        "tags": ["Question"],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Question"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/answer": {
+      "post": {
+        "tags": ["Answer"],
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "description": "Answer object",
+            "schema": {
+              "$ref": "#/definitions/Answer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "type": "string"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "type": "string"
+            }
+          }
+        }
+      }
+    },
+    "/api/answer/{questionId}": {
+      "put": {
+        "tags": ["Answer"],
+        "parameters": [
+          {
+            "name": "questionId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "Answer object",
+            "schema": {
+              "$ref": "#/definitions/Answer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "type": "string"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "type": "string"
+            }
+          }
+        }
+      }
+    },
+    "/api/answer/result": {
+      "get": {
+        "tags": ["Answer"],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Answer"
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "type": "string"
+            }
+          }
+        }
+      }
+    },
+    "/api/answer/delete": {
+      "delete": {
+        "tags": ["Answer"],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "type": "string"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "type": "string"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "Question": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer"
+        },
+        "content": {
+          "type": "string"
+        },
+        "answers": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Answer"
+          },
+          "required": true
+        }
+      },
+      "required": ["id", "content", "answers"]
+    },
+    "Answer": {
+      "type": "object",
+      "properties": {
+        "questionId": {
+          "type": "string"
+        },
+        "type": {
+          "type": "string",
+          "enum": ["extrovert", "introvert"]
+        },
+        "_id": {
+          "type": "string"
+        }
+      },
+      "required": ["questionId", "type", "_id"]
+    }
+  }
+}
