@@ -3,6 +3,7 @@ import { Request, Response } from "express";
 import { Container } from "typedi";
 import { STATUS_CODE } from "../utils/constants";
 import AnswerService from "../services/AnswerService";
+import { ANSWERS } from "../utils/messages";
 
 export const answerRoute = express.Router();
 const answerService = Container.get(AnswerService);
@@ -10,16 +11,15 @@ const answerService = Container.get(AnswerService);
 answerRoute.post("/api/answer", async (req: Request, res: Response) => {
   try {
     const { questionId, type } = req.body;
+
     await answerService.addAnswers({
       questionId: questionId,
       type: type,
     });
 
-    return res.status(STATUS_CODE.OK).send("Answers added successfully");
+    return res.status(STATUS_CODE.CREATED).send(ANSWERS.ADD);
   } catch (error) {
-    return res
-      .status(STATUS_CODE.INTERNAL_SERVER)
-      .send("Failed to add answers");
+    return error;
   }
 });
 
@@ -32,21 +32,26 @@ answerRoute.put(
 
       await answerService.updateAnswers(questionId, type);
 
-      return res.status(STATUS_CODE.OK).send("Answers changed successfully");
+      return res.status(STATUS_CODE.OK).send(ANSWERS.UPDATE);
     } catch (error) {
-      console.log(error);
-      return res
-        .status(STATUS_CODE.INTERNAL_SERVER)
-        .send("Failed to add answers");
+      return error;
     }
   }
 );
 
 answerRoute.get("/api/answer/result", async (_req: Request, res: Response) => {
   try {
-    const answers = await answerService.getAllAnswers();
+    const result = await answerService.getResults();
 
-    return res.status(STATUS_CODE.OK).json(answers);
+    if (result) {
+      return res.status(STATUS_CODE.OK).json({
+        result: result,
+      });
+    } else {
+      return res.status(STATUS_CODE.OK).json({
+        result: ANSWERS.NO_RESULTS,
+      });
+    }
   } catch (error) {
     return error;
   }
@@ -58,7 +63,7 @@ answerRoute.delete(
     try {
       await answerService.deleteAnswers();
 
-      return res.status(STATUS_CODE.OK).json("S-a sters");
+      return res.status(STATUS_CODE.OK).json(ANSWERS.DELETE);
     } catch (error) {
       return error;
     }
