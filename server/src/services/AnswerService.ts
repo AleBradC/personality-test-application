@@ -3,7 +3,8 @@ import { Service, Container } from "typedi";
 import AnswerRepository from "../repositories/AnswerRepository";
 import { IAnswer } from "../interfaces/common";
 import IAnswerService from "../interfaces/services/IAnswerService";
-// import CustomError from "../errorHandlers/ErrorHandler";
+import CustomError from "../errorHandlers/ErrorHandler";
+import { STATUS_CODE } from "../utils/constants";
 
 @Service()
 export default class AnswerService implements IAnswerService {
@@ -13,8 +14,7 @@ export default class AnswerService implements IAnswerService {
     try {
       return await this.repository.getAnswers();
     } catch (error) {
-      // throw new CustomError(error.statusCode, error.message);
-      throw error;
+      throw new CustomError(STATUS_CODE.BAD_REQUEST, (error as Error).message);
     }
   };
 
@@ -25,8 +25,7 @@ export default class AnswerService implements IAnswerService {
         type: details.type,
       });
     } catch (error) {
-      // throw new CustomError(error.statusCode, error.message);
-      throw error;
+      throw new CustomError(STATUS_CODE.BAD_REQUEST, (error as Error).message);
     }
   };
 
@@ -34,8 +33,7 @@ export default class AnswerService implements IAnswerService {
     try {
       await this.repository.putAnswers(questionId, type);
     } catch (error) {
-      // throw new CustomError(error.statusCode, error.message);
-      throw error;
+      throw new CustomError(STATUS_CODE.BAD_REQUEST, (error as Error).message);
     }
   };
 
@@ -43,8 +41,7 @@ export default class AnswerService implements IAnswerService {
     try {
       return await this.repository.deleteAnswers();
     } catch (error) {
-      // throw new CustomError(error.statusCode, error.message);
-      throw error;
+      throw new CustomError(STATUS_CODE.BAD_REQUEST, (error as Error).message);
     }
   };
 }

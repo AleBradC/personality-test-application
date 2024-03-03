@@ -3,6 +3,8 @@ import { Service } from "typedi";
 import { IAnswer } from "../interfaces/common";
 import IAnswerRepositoryLayer from "../interfaces/repository/IAnswerRepositoryLayer";
 import Answer from "../models/Answer";
+import CustomError from "../errorHandlers/ErrorHandler";
+import { STATUS_CODE } from "src/utils/constants";
 
 @Service()
 export default class AnswerRepository implements IAnswerRepositoryLayer {
@@ -10,8 +12,7 @@ export default class AnswerRepository implements IAnswerRepositoryLayer {
     try {
       return await Answer.find({}, { _id: 0, __v: 0 });
     } catch (error) {
-      // throw new CustomError(error.statusCode, error.message);
-      throw error;
+      throw new CustomError(STATUS_CODE.BAD_REQUEST, (error as Error).message);
     }
   };
 
@@ -22,8 +23,7 @@ export default class AnswerRepository implements IAnswerRepositoryLayer {
         type: details.type,
       });
     } catch (error) {
-      // throw new CustomError(error.statusCode, error.message);
-      throw error;
+      throw new CustomError(STATUS_CODE.BAD_REQUEST, (error as Error).message);
     }
   };
 
@@ -32,13 +32,12 @@ export default class AnswerRepository implements IAnswerRepositoryLayer {
       const currentAnswer = await Answer.findOne({ questionId: questionId });
 
       if (!currentAnswer) {
-        throw new Error("Nu exista");
+        throw new CustomError(STATUS_CODE.NOT_FOUND, "The answer is not found");
       }
 
       await Answer.findOneAndUpdate({ questionId: questionId }, { type: type });
     } catch (error) {
-      // throw new CustomError(error.statusCode, error.message);
-      throw error;
+      throw new CustomError(STATUS_CODE.BAD_REQUEST, (error as Error).message);
     }
   };
 
@@ -46,8 +45,7 @@ export default class AnswerRepository implements IAnswerRepositoryLayer {
     try {
       await Answer.deleteMany({});
     } catch (error) {
-      // throw new CustomError(error.statusCode, error.message);
-      throw error;
+      throw new CustomError(STATUS_CODE.BAD_REQUEST, (error as Error).message);
     }
   };
 }

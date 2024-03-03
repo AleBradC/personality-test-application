@@ -11,7 +11,9 @@ questionRoute.get("/api/question", async (_req: Request, res: Response) => {
   try {
     const questions = await questionService.getAllQuestions();
 
-    return res.status(STATUS_CODE.OK).json(questions);
+    return res.status(STATUS_CODE.OK).json({
+      data: questions,
+    });
   } catch (error) {
     return error;
   }

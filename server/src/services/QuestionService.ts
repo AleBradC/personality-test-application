@@ -1,9 +1,10 @@
 import { Service, Container } from "typedi";
 
 import QuestionRepository from "../repositories/QuestionRepository";
-import { IQuestion } from "../interfaces/common";
 import IQuestionService from "../interfaces/services/IQuestionService";
 import CustomError from "../errorHandlers/ErrorHandler";
+import { IQuestion } from "../interfaces/common";
+import { STATUS_CODE } from "../utils/constants";
 
 @Service()
 export default class QuestionService implements IQuestionService {
@@ -13,8 +14,7 @@ export default class QuestionService implements IQuestionService {
     try {
       return await this.repository.getQuestions();
     } catch (error) {
-      // throw new CustomError(error.statusCode, error.message);
-      throw error;
+      throw new CustomError(STATUS_CODE.BAD_REQUEST, (error as Error).message);
     }
   };
 }

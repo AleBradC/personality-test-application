@@ -7,7 +7,6 @@ const answerSchema = new Schema(
       type: String, // extrovert or introvert
       required: true,
     },
-    _id: String,
   }
   // { _id: false, __v: false }
 );

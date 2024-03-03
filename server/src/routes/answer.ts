@@ -15,11 +15,9 @@ answerRoute.post("/api/answer", async (req: Request, res: Response) => {
       type: type,
     });
 
-    return res.status(STATUS_CODE.OK).send("Answers added successfully");
+    return res.status(STATUS_CODE.CREATED).send("Answers added successfully");
   } catch (error) {
-    return res
-      .status(STATUS_CODE.INTERNAL_SERVER)
-      .send("Failed to add answers");
+    return error;
   }
 });
 
@@ -31,13 +29,9 @@ answerRoute.put(
       const { type } = req.body;
 
       await answerService.updateAnswers(questionId, type);
-
       return res.status(STATUS_CODE.OK).send("Answers changed successfully");
     } catch (error) {
-      console.log(error);
-      return res
-        .status(STATUS_CODE.INTERNAL_SERVER)
-        .send("Failed to add answers");
+      return error;
     }
   }
 );
@@ -58,7 +52,7 @@ answerRoute.delete(
     try {
       await answerService.deleteAnswers();
 
-      return res.status(STATUS_CODE.OK).json("S-a sters");
+      return res.status(STATUS_CODE.OK).json("All the answers are deleted");
     } catch (error) {
       return error;
     }
