@@ -11,6 +11,14 @@ class MockAnswerRepository {
         questionId: "1",
         type: "extrovert",
       },
+      {
+        questionId: "2",
+        type: "extrovert",
+      },
+      {
+        questionId: "3",
+        type: "introvert",
+      },
     ];
   };
 }
@@ -23,10 +31,10 @@ describe("AnswerService", () => {
     answerService = new AnswerService();
   });
 
-  it("should return all answers", async () => {
+  it("should return introvert or extrovert", async () => {
     const result = await answerService.getResults();
     expect(result).to.be.an("string");
-    // expect(result).to.deep.equal("extrovert");
+    expect(result).to.equal("extrovert");
   });
 
   it("should throw an error when repository fails", async () => {

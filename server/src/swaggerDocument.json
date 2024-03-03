@@ -105,9 +105,9 @@
         "tags": ["Answer"],
         "responses": {
           "200": {
-            "description": "OK",
+            "description": "Introvert | Extrovert",
             "schema": {
-              "type": "array",
+              "type": "string",
               "items": {
                 "$ref": "#/definitions/Answer"
               }
