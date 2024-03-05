@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "watch": "nodemon src/server.ts",
-    "test": "mocha"
+    "test": "nyc mocha"
   },
   "keywords": [],
   "author": "",
@@ -42,9 +42,12 @@
   "devDependencies": {
     "@types/chai": "^4.3.1",
     "@types/mocha": "^9.1.1",
+    "@types/sinon": "^17.0.3",
     "@types/swagger-ui-express": "^4.1.6",
     "chai": "^4.3.6",
     "mocha": "^10.0.0",
-    "nodemon": "^3.1.0"
+    "nodemon": "^3.1.0",
+    "nyc": "^15.1.0",
+    "sinon": "^17.0.1"
   }
 }

@@ -1,7 +1,7 @@
 import { Service } from "typedi";
 
 import Question from "../models/Question";
-import IQuestionRepositoryLayer from "../interfaces/repository/IQuestionRepositoryLayer";
+import IQuestionRepositoryLayer from "../interfaces/repository/IQuestionRepository";
 import { IQuestion } from "../interfaces/common";
 
 import CustomError from "../errorHandlers/ErrorHandler";
