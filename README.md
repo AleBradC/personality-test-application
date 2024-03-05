@@ -9,7 +9,7 @@ Backend:
 - TypeScript
 - MongoDB & Mongoose
 - TypeDI - for dependency injection
-- Mocha & Chai for testing
+- Mocha & Chai & Sinon for testing
 - Others: helmet, cors, bodyparser
 
 Frontend:
@@ -28,20 +28,18 @@ Frontend:
 
 1. Clone the project
 2. Run `npm install`, to install all the server & client dependencies
-<!-- 3. `cd server`
 3. Create an `.env` file in the server directory and add the following:
 
-   ````env
+   ```env
     PORT=8080
+   ```
 
-   ``` -->
-   ````
+4. Run `npm start`, to run server & client or you can run `npm run server` to run the server or `npm run client` to run only the client
 
 # Testing
 
-- `cd server`
-- `npm run test:unit`
+- `npm run test`
 
 ## Documentation
 
-- in progress swagger
+http://localhost:8000/api-docs/#/
