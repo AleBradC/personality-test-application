@@ -1,7 +1,7 @@
 import mongoose from "mongoose";
 import { Service } from "typedi";
 import { IAnswer } from "../interfaces/common";
-import IAnswerRepositoryLayer from "../interfaces/repository/IAnswerRepositoryLayer";
+import IAnswerRepositoryLayer from "../interfaces/repository/IAnswerRepository";
 import Answer from "../models/Answer";
 import CustomError from "../errorHandlers/ErrorHandler";
 import { STATUS_CODE } from "../utils/constants";

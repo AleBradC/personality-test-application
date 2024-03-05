@@ -5,7 +5,7 @@ import IAnswerService from "../interfaces/services/IAnswerService";
 import CustomError from "../errorHandlers/ErrorHandler";
 import { IAnswer } from "../interfaces/common";
 import { STATUS_CODE } from "../utils/constants";
-import { calculateResultHandler } from "./utils";
+import { calculateResultHandler } from "../utils/handlers";
 
 @Service()
 export default class AnswerService implements IAnswerService {
