@@ -3,8 +3,8 @@ import { Route, Routes } from "react-router-dom";
 
 import { landingPageRoute, takeTestPageRoute } from "./routes";
 
-const LandingPage = React.lazy(() => import("./Pages/LandingPage"));
-const TakeTestPage = React.lazy(() => import("./Pages/TakeTestPage"));
+const LandingPage = React.lazy(() => import("./pages/LandingPage"));
+const TakeTestPage = React.lazy(() => import("./pages/TakeTestPage"));
 
 const App: React.FC = () => {
   return (

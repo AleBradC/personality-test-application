@@ -2,7 +2,7 @@ import React from "react";
 import logoImg from "../assets/logo.svg";
 import landingPageImg from "../assets/landing-page.png";
 
-import { BasicButton } from "../Components/BasicButton";
+import { BasicButton } from "../components/BasicButton";
 import styled from "styled-components";
 
 const LandingPage: React.FC = () => {

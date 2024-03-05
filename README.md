@@ -1,4 +1,6 @@
-# Authentication app
+# Personality app
+
+This is a personality test app.
 
 ## Dependencies
 
