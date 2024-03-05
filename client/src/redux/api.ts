@@ -3,10 +3,10 @@ import { AnswerParams, Question } from "./types";
 
 export const api = createApi({
   reducerPath: "api",
-  baseQuery: fetchBaseQuery({ baseUrl: "http://localhost:8080" }),
+  baseQuery: fetchBaseQuery({ baseUrl: "http://localhost:8000" }),
   tagTypes: ["Question", "Answer"],
   endpoints: (builder) => ({
-    getAnswers: builder.query<Question[], void>({
+    getQuestions: builder.query<Question[], void>({
       query: () => "/api/question",
       providesTags: ["Question"],
     }),
@@ -40,4 +40,10 @@ export const api = createApi({
   }),
 });
 
-export const {} = api;
+export const {
+  useGetQuestionsQuery,
+  useGetAnswerResultQuery,
+  useAddAnswersMutation,
+  useUpdateAnswerMutation,
+  useDeleteAllAnswersMutation,
+} = api;

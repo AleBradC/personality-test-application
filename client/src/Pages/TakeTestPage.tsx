@@ -1,7 +1,10 @@
 import React from "react";
+import { useGetQuestionsQuery } from "../redux/api";
 import styled from "styled-components";
 
 const TakeTestPage: React.FC = () => {
+  const { data, isLoading, isFetching, isError } = useGetQuestionsQuery();
+
   return (
     <Container>
       <Header>PERSONALITY TEST</Header>
