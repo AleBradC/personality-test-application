@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "watch": "nodemon src/server.ts",
-    "test": "nyc mocha"
+    "test": "mocha",
+    "test:coverage": "nyc mocha"
   },
   "keywords": [],
   "author": "",
