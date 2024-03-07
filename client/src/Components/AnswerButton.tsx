@@ -36,17 +36,15 @@ const ButtonContainer = styled.button<{ selected: boolean }>`
   font-weight: bolder;
   letter-spacing: 1px;
 
-  :hover {
-  }
-
-  :disabled {
-    cursor: not-allowed;
+  &:hover {
+    background: ${(props) => props.theme.colors.blueLight};
+    color: ${(props) => props.theme.colors.greyDarker};
   }
 
   ${(props) =>
     props.selected &&
     css`
-      border: 1px solid red;
+      border: 1px solid ${(props) => props.theme.colors.red};
     `}
 `;
 

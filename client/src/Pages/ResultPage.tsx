@@ -1,10 +1,10 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
-import { takeTestPageRoute } from "../routes";
 import {
   useDeleteAllAnswersMutation,
   useGetAnswersResultQuery,
 } from "../redux/api";
+import { landingPageRoute } from "../routes";
 import BasicButton from "../components/BasicButton";
 import styled from "styled-components";
 
@@ -13,12 +13,8 @@ const ResultPage: React.FC = () => {
   const { data } = useGetAnswersResultQuery();
   const [deleteAllAnswers, { isSuccess }] = useDeleteAllAnswersMutation();
 
-  const redirectToTakeTestPage = () => {
-    navigateTo(takeTestPageRoute);
-  };
-
   if (isSuccess) {
-    redirectToTakeTestPage();
+    navigateTo(landingPageRoute);
   }
 
   const handleRetryTest = async () => {
@@ -28,7 +24,6 @@ const ResultPage: React.FC = () => {
   return (
     <Container>
       <div> {data?.result} </div>
-
       <div>
         <p> Reset and retry </p>
         <BasicButton onClick={handleRetryTest}> Retry </BasicButton>

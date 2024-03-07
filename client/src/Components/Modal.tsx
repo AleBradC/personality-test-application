@@ -52,7 +52,7 @@ const BlurWrapper = styled.div`
   height: 100%;
   overflow: hidden;
   z-index: ${(props) => props.theme.zIndex.others};
-  backdrop-filter: blur(32px);
+  backdrop-filter: blur(42px);
 `;
 
 const Container = styled.div`
@@ -69,9 +69,10 @@ const Container = styled.div`
   margin: auto;
   max-width: 660px;
   width: 100%;
-  height: 660px;
+  height: 500px;
   padding: 20px;
   box-shadow: 0 5px 10px 2px rgba(195, 192, 192, 0.5);
+  background: ${(props) => props.theme.colors.beigeLight2};
 
   border-radius: 4px;
 

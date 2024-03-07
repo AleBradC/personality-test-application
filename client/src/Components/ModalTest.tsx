@@ -3,21 +3,25 @@ import { useNavigate } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "../redux/hooks";
 import { useAddAnswersMutation, useGetQuestionsQuery } from "../redux/api";
 import { Answer, Question, QuestionAnswer } from "../types";
-import { selectAnswer } from "../redux/reducers/answerSlice";
-import { setCurrentStep } from "../redux/reducers/stepSlice";
+import { resetAnswers, selectAnswer } from "../redux/reducers/answerSlice";
+import { resetStep, setCurrentStep } from "../redux/reducers/stepSlice";
 import { resultPage } from "../routes";
-import Modal from "../components/Modal";
-import BasicButton from "../components/BasicButton";
-import AnswerButton from "../components/AnswerButton";
+import Modal from "./Modal";
+import BasicButton from "./BasicButton";
+import AnswerButton from "./AnswerButton";
 import styled from "styled-components";
 
-const TakeTestPage: React.FC = () => {
+export interface ModalTestProps {
+  showModal: boolean;
+  setShowModal: (value: boolean) => void;
+}
+
+const ModalTest: React.FC<ModalTestProps> = ({ showModal, setShowModal }) => {
   const navigateTo = useNavigate();
 
   const { data: questions } = useGetQuestionsQuery();
   const [addAnswer] = useAddAnswersMutation();
 
-  const [showModal, setShowModal] = useState(false);
   const [currentQuestion, setCurrentQuestion] = useState<Question>();
 
   const dispatch = useAppDispatch();
@@ -41,10 +45,6 @@ const TakeTestPage: React.FC = () => {
     return null;
   }
 
-  const handleOpenTest = () => {
-    setShowModal(true);
-  };
-
   const handleNextQuestion = () => {
     if (currentStep < questions.length) {
       dispatch(setCurrentStep(currentStep + 1));
@@ -67,15 +67,13 @@ const TakeTestPage: React.FC = () => {
     );
   };
 
-  const redirectToTakeTestPage = () => {
-    navigateTo(resultPage);
-  };
-
   const handleSubmit = async () => {
     await addAnswer(selectedAnswers);
 
     setShowModal(false);
-    redirectToTakeTestPage();
+    navigateTo(resultPage);
+    dispatch(resetAnswers());
+    dispatch(resetStep());
   };
 
   const isSelected = (answerId: number) => {
@@ -85,9 +83,12 @@ const TakeTestPage: React.FC = () => {
     });
   };
 
+  const hasSelectedAnswerForCurrentQuestion = selectedAnswers.some(
+    (answer) => answer.questionId === currentStep
+  );
+
   return (
     <Container>
-      <BasicButton onClick={handleOpenTest}>Start your test</BasicButton>
       <Modal
         showModal={showModal}
         header={
@@ -110,6 +111,7 @@ const TakeTestPage: React.FC = () => {
                   {answer.content}
                 </AnswerButton>
               ))}
+              <ErrorContainer> All questions are required </ErrorContainer>
             </AnswersContainer>
           </Body>
         }
@@ -124,7 +126,10 @@ const TakeTestPage: React.FC = () => {
             {currentStep === questions.length ? (
               <BasicButton onClick={handleSubmit}> Submit </BasicButton>
             ) : (
-              <BasicButton onClick={handleNextQuestion}>
+              <BasicButton
+                onClick={handleNextQuestion}
+                disabled={!hasSelectedAnswerForCurrentQuestion}
+              >
                 Next question
               </BasicButton>
             )}
@@ -146,17 +151,34 @@ const Container = styled.div`
 
 const HeaderContainer = styled.div`
   width: 100%;
+  padding: 20px 20px 20px 0;
+  font-family: Kumbh Sans, sans-serif;
+  font-size: 14px;
 `;
 
-const Body = styled.div``;
+const Body = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%;
+`;
 
 const QuestionContainer = styled.div`
-  padding: 20px;
+  padding: 20px 20px 20px 0;
+  font-family: Newsreader Display, sans-serif;
+  line-height: 23px;
+  font-size: 18px;
+`;
+
+const ErrorContainer = styled.div`
+  font-family: Newsreader Display, sans-serif;
+  font-style: italic;
 `;
 
 const AnswersContainer = styled.div`
   display: flex;
   flex-direction: column;
+  height: 100%;
   gap: 10px;
 `;
 
@@ -167,4 +189,4 @@ const Footer = styled.div`
   padding: 20px;
 `;
 
-export default TakeTestPage;
+export default ModalTest;

@@ -25,9 +25,12 @@ export const answerSlice = createSlice({
         state.answers.push(action.payload);
       }
     },
+    resetAnswers(state) {
+      state.answers = [];
+    },
   },
 });
 
-export const { selectAnswer } = answerSlice.actions;
+export const { selectAnswer, resetAnswers } = answerSlice.actions;
 
 export default answerSlice.reducer;

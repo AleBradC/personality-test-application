@@ -30,10 +30,12 @@ const ButtonContainer = styled.button`
   font-weight: bolder;
   letter-spacing: 1px;
 
-  :hover {
+  &:hover {
+    background: ${(props) => props.theme.colors.blueLight};
+    color: ${(props) => props.theme.colors.greyDarker};
   }
 
-  :disabled {
+  &:disabled {
     cursor: not-allowed;
   }
 `;
