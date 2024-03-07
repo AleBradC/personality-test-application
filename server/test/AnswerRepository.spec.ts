@@ -1,7 +1,7 @@
 import { expect } from "chai";
 import sinon from "sinon";
-import Answer from "../src/models/Answer"; // Changed import
-import AnswerRepository from "../src/repositories/AnswerRepository"; // Changed import
+import Answer from "../src/models/Answer";
+import AnswerRepository from "../src/repositories/AnswerRepository";
 
 describe("AnswerRepository", () => {
   describe("find", () => {
