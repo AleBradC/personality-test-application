@@ -1,15 +1,19 @@
 import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "../redux/hooks";
 import { useAddAnswersMutation, useGetQuestionsQuery } from "../redux/api";
 import { Answer, Question, QuestionAnswer } from "../types";
 import { selectAnswer } from "../redux/reducers/answerSlice";
 import { setCurrentStep } from "../redux/reducers/stepSlice";
+import { resultPage } from "../routes";
 import Modal from "../components/Modal";
 import BasicButton from "../components/BasicButton";
 import AnswerButton from "../components/AnswerButton";
 import styled from "styled-components";
 
 const TakeTestPage: React.FC = () => {
+  const navigateTo = useNavigate();
+
   const { data: questions } = useGetQuestionsQuery();
   const [addAnswer] = useAddAnswersMutation();
 
@@ -63,10 +67,15 @@ const TakeTestPage: React.FC = () => {
     );
   };
 
+  const redirectToTakeTestPage = () => {
+    navigateTo(resultPage);
+  };
+
   const handleSubmit = async () => {
     await addAnswer(selectedAnswers);
 
     setShowModal(false);
+    redirectToTakeTestPage();
   };
 
   const isSelected = (answerId: number) => {

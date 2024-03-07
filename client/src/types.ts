@@ -15,8 +15,6 @@ export interface Question {
   answers: QuestionAnswer[];
 }
 
-export interface AnswerParams {
-  questionId: number;
-  type: string;
-  id: number;
+export interface TestResult {
+  result: string;
 }
