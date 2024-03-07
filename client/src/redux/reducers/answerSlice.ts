@@ -12,9 +12,22 @@ const initialState: initStateProps = {
 export const answerSlice = createSlice({
   name: "answerSlice",
   initialState,
-  reducers: {},
+  reducers: {
+    selectAnswer: (state, action: PayloadAction<Answer>) => {
+      const { questionId } = action.payload;
+      const existingAnswerIndex = state.answers.findIndex(
+        (answer) => answer.questionId === questionId
+      );
+
+      if (existingAnswerIndex !== -1) {
+        state.answers[existingAnswerIndex] = action.payload;
+      } else {
+        state.answers.push(action.payload);
+      }
+    },
+  },
 });
 
-export const {} = answerSlice.actions;
+export const { selectAnswer } = answerSlice.actions;
 
 export default answerSlice.reducer;

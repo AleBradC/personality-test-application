@@ -1,5 +1,5 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
-import { AnswerParams, Question } from "../types";
+import { Answer, AnswerParams, Question } from "../types";
 
 export const api = createApi({
   reducerPath: "api",
@@ -14,11 +14,13 @@ export const api = createApi({
       query: () => "/api/answer/result",
       providesTags: ["Answer"],
     }),
-    addAnswers: builder.mutation<void, AnswerParams>({
-      query: ({ questionId, type }) => ({
+    addAnswers: builder.mutation<void, Answer[]>({
+      query: (answers) => ({
         url: "/api/answer",
         method: "POST",
-        body: { questionId, type },
+        body: {
+          answers: answers,
+        },
       }),
       invalidatesTags: ["Answer"],
     }),

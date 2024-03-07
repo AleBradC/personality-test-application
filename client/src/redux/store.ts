@@ -1,9 +1,12 @@
 import { combineReducers, configureStore } from "@reduxjs/toolkit";
 
 import { api } from "./api";
+import { answerSlice } from "./reducers/answerSlice";
 
 export const reducer = combineReducers({
   [api.reducerPath]: api.reducer,
+
+  [answerSlice.name]: answerSlice.reducer,
 });
 
 export const store = configureStore({

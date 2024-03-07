@@ -1,5 +1,5 @@
 export interface Answer {
-  questionId: string;
+  questionId: number;
   type: string;
 }
 
@@ -14,6 +14,6 @@ export interface Question {
 }
 
 export interface AnswerParams {
-  questionId: string;
+  questionId: number;
   type: string;
 }
