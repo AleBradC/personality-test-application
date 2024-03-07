@@ -1,14 +1,14 @@
 import { ReactNode } from "react";
 import styled from "styled-components";
 
-export interface QuestionButtonProps
+export interface AnswerButtonProps
   extends React.ButtonHTMLAttributes<HTMLButtonElement> {
-  children: string | ReactNode;
+  children: string | ReactNode | any;
   className?: string;
   isLoading?: boolean;
 }
 
-export const QuestionButton: React.FC<QuestionButtonProps> = ({
+const AnswerButton: React.FC<AnswerButtonProps> = ({
   children,
   className,
   isLoading,
@@ -37,3 +37,5 @@ const ButtonContainer = styled.button`
     cursor: not-allowed;
   }
 `;
+
+export default AnswerButton;

@@ -1,5 +1,5 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
-import { AnswerParams, Question } from "./types";
+import { AnswerParams, Question } from "../types";
 
 export const api = createApi({
   reducerPath: "api",
@@ -7,7 +7,7 @@ export const api = createApi({
   tagTypes: ["Question", "Answer"],
   endpoints: (builder) => ({
     getQuestions: builder.query<Question[], void>({
-      query: () => "/api/question",
+      query: () => "/api/questions",
       providesTags: ["Question"],
     }),
     getAnswerResult: builder.query<string, void>({
