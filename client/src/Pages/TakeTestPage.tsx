@@ -70,7 +70,10 @@ const TakeTestPage: React.FC = () => {
   };
 
   const isSelected = (answerId: number) => {
-    return selectedAnswers.some((answer) => answer.id === answerId);
+    return selectedAnswers.some((answer) => {
+      if (answer.id === answerId && answer.questionId === currentStep)
+        return true;
+    });
   };
 
   return (
