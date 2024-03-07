@@ -1,11 +1,13 @@
 export interface Answer {
-  questionId: string;
+  questionId: number;
   type: string;
+  id: number;
 }
 
 export interface QuestionAnswer {
   content: string;
   type: string;
+  id: number;
 }
 export interface Question {
   id: number;
@@ -13,7 +15,6 @@ export interface Question {
   answers: QuestionAnswer[];
 }
 
-export interface AnswerParams {
-  questionId: string;
-  type: string;
+export interface TestResult {
+  result: string;
 }

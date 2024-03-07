@@ -1,10 +1,11 @@
 import React, { Suspense } from "react";
 import { Route, Routes } from "react-router-dom";
-import { landingPageRoute, takeTestPageRoute } from "./routes";
+import { landingPageRoute, takeTestPageRoute, resultPage } from "./routes";
 import Loading from "./components/Loading";
 
 const LandingPage = React.lazy(() => import("./pages/LandingPage"));
 const TakeTestPage = React.lazy(() => import("./pages/TakeTestPage"));
+const ResultPage = React.lazy(() => import("./pages/ResultPage"));
 
 const App: React.FC = () => {
   return (
@@ -12,6 +13,7 @@ const App: React.FC = () => {
       <Routes>
         <Route path={landingPageRoute} element={<LandingPage />} />
         <Route path={takeTestPageRoute} element={<TakeTestPage />} />
+        <Route path={resultPage} element={<ResultPage />} />
       </Routes>
     </Suspense>
   );

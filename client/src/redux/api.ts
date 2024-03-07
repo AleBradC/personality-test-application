@@ -1,5 +1,5 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
-import { AnswerParams, Question } from "../types";
+import { Answer, Question, TestResult } from "../types";
 
 export const api = createApi({
   reducerPath: "api",
@@ -10,23 +10,17 @@ export const api = createApi({
       query: () => "/api/questions",
       providesTags: ["Question"],
     }),
-    getAnswerResult: builder.query<string, void>({
+    getAnswerResult: builder.query<TestResult, void>({
       query: () => "/api/answer/result",
       providesTags: ["Answer"],
     }),
-    addAnswers: builder.mutation<void, AnswerParams>({
-      query: ({ questionId, type }) => ({
+    addAnswers: builder.mutation<void, Answer[]>({
+      query: (answers) => ({
         url: "/api/answer",
         method: "POST",
-        body: { questionId, type },
-      }),
-      invalidatesTags: ["Answer"],
-    }),
-    updateAnswer: builder.mutation<void, AnswerParams>({
-      query: ({ questionId, type }) => ({
-        url: `/api/answer/${questionId}`,
-        method: "PUT",
-        body: { type },
+        body: {
+          answers: answers,
+        },
       }),
       invalidatesTags: ["Answer"],
     }),
@@ -44,6 +38,5 @@ export const {
   useGetQuestionsQuery,
   useGetAnswerResultQuery,
   useAddAnswersMutation,
-  useUpdateAnswerMutation,
   useDeleteAllAnswersMutation,
 } = api;

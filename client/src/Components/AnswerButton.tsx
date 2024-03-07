@@ -1,27 +1,33 @@
 import { ReactNode } from "react";
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 
 export interface AnswerButtonProps
   extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   children: string | ReactNode | any;
   className?: string;
   isLoading?: boolean;
+  selected: any;
 }
 
 const AnswerButton: React.FC<AnswerButtonProps> = ({
   children,
   className,
   isLoading,
+  selected,
   ...htmlButtonProps
 }) => {
   return (
-    <ButtonContainer className={className} {...htmlButtonProps}>
+    <ButtonContainer
+      className={className}
+      selected={selected}
+      {...htmlButtonProps}
+    >
       {children}
     </ButtonContainer>
   );
 };
 
-const ButtonContainer = styled.button`
+const ButtonContainer = styled.button<{ selected: boolean }>`
   padding: 10px 25px;
   min-width: 226px;
 
@@ -36,6 +42,12 @@ const ButtonContainer = styled.button`
   :disabled {
     cursor: not-allowed;
   }
+
+  ${(props) =>
+    props.selected &&
+    css`
+      border: 1px solid red;
+    `}
 `;
 
 export default AnswerButton;

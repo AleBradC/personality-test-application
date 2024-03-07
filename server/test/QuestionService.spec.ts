@@ -8,25 +8,30 @@ const mockQuestionRepository = {
   getQuestions: async (): Promise<IQuestion[]> => {
     return [
       {
-        id: 9,
+        id: 1,
         content:
-          "You're out with a group of friends and there's a person who's quite shy and doesn't talk much. You:",
+          "You're really busy at work and a colleague is telling you their life story and personal woes. You:",
         answers: [
           {
-            content:
-              "Notice that they're alone, but don't go over to talk with them",
+            id: 1,
+            content: "Don't dare to interrupt them",
             type: "introvert",
           },
           {
-            content: "Go and have a chat with them",
+            id: 2,
+            content:
+              "Think it's more important to give them some of your time; work can wait",
             type: "extrovert",
           },
           {
-            content: "Hardly notice them at all",
+            id: 3,
+            content: "Listen, but with only with half an ear",
             type: "introvert",
           },
           {
-            content: "Shoot some friendly smiles in their direction",
+            id: 4,
+            content:
+              "Interrupt and explain that you are really busy at the moment",
             type: "extrovert",
           },
         ],
@@ -47,25 +52,30 @@ describe("QuestionService", () => {
     it("should return all the questions", async () => {
       const response = [
         {
-          id: 9,
+          id: 1,
           content:
-            "You're out with a group of friends and there's a person who's quite shy and doesn't talk much. You:",
+            "You're really busy at work and a colleague is telling you their life story and personal woes. You:",
           answers: [
             {
-              content:
-                "Notice that they're alone, but don't go over to talk with them",
+              id: 1,
+              content: "Don't dare to interrupt them",
               type: "introvert",
             },
             {
-              content: "Go and have a chat with them",
+              id: 2,
+              content:
+                "Think it's more important to give them some of your time; work can wait",
               type: "extrovert",
             },
             {
-              content: "Hardly notice them at all",
+              id: 3,
+              content: "Listen, but with only with half an ear",
               type: "introvert",
             },
             {
-              content: "Shoot some friendly smiles in their direction",
+              id: 4,
+              content:
+                "Interrupt and explain that you are really busy at the moment",
               type: "extrovert",
             },
           ],

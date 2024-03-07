@@ -10,12 +10,8 @@ const answerService = Container.get(AnswerService);
 
 answerRoute.post("/api/answer", async (req: Request, res: Response) => {
   try {
-    const { questionId, type } = req.body;
-
-    await answerService.addAnswers({
-      questionId: questionId,
-      type: type,
-    });
+    const { answers } = req.body;
+    await answerService.addAnswers(answers);
 
     return res.status(STATUS_CODE.CREATED).send(ANSWERS.ADD);
   } catch (error) {

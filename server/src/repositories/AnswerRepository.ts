@@ -16,12 +16,9 @@ export default class AnswerRepository implements IAnswerRepositoryLayer {
     }
   };
 
-  postAnswers = async (details: IAnswer): Promise<void> => {
+  postAnswers = async (answers: IAnswer[]): Promise<void> => {
     try {
-      await Answer.create({
-        questionId: details.questionId,
-        type: details.type,
-      });
+      await Answer.create(answers);
     } catch (error) {
       throw new CustomError(STATUS_CODE.BAD_REQUEST, (error as Error).message);
     }
