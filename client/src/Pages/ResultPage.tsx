@@ -3,14 +3,14 @@ import { useNavigate } from "react-router-dom";
 import { takeTestPageRoute } from "../routes";
 import {
   useDeleteAllAnswersMutation,
-  useGetAnswerResultQuery,
+  useGetAnswersResultQuery,
 } from "../redux/api";
 import BasicButton from "../components/BasicButton";
 import styled from "styled-components";
 
 const ResultPage: React.FC = () => {
   const navigateTo = useNavigate();
-  const { data } = useGetAnswerResultQuery();
+  const { data } = useGetAnswersResultQuery();
   const [deleteAllAnswers, { isSuccess }] = useDeleteAllAnswersMutation();
 
   const redirectToTakeTestPage = () => {

@@ -40,25 +40,21 @@ describe("AnswerRepository", () => {
 
   describe("update", () => {
     it("should update the answer", async () => {
-      const questionId = "1";
+      const id = "1";
       const type = "introvert";
       const findOneStub = sinon
         .stub(Answer, "findOne")
-        .resolves({ questionId: questionId, type: "extrovert" });
+        .resolves({ id: id, type: "extrovert" });
       const findOneAndUpdateStub = sinon
         .stub(Answer, "findOneAndUpdate")
         .resolves();
 
       const answerRepository = new AnswerRepository();
-      await answerRepository.putAnswers(questionId, type);
+      await answerRepository.putAnswers(id, type);
 
-      expect(findOneStub.calledOnceWithExactly({ questionId: questionId })).to
-        .be.true;
+      expect(findOneStub.calledOnceWithExactly({ id: id })).to.be.true;
       expect(
-        findOneAndUpdateStub.calledOnceWithExactly(
-          { questionId: questionId },
-          { type: type }
-        )
+        findOneAndUpdateStub.calledOnceWithExactly({ id: id }, { type: type })
       ).to.be.true;
     });
   });

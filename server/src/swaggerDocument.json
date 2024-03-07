@@ -36,7 +36,7 @@
         }
       }
     },
-    "/api/answer": {
+    "/api/answers": {
       "post": {
         "tags": ["Answer"],
         "parameters": [
@@ -65,12 +65,12 @@
         }
       }
     },
-    "/api/answer/{questionId}": {
+    "/api/answers/{id}": {
       "put": {
         "tags": ["Answer"],
         "parameters": [
           {
-            "name": "questionId",
+            "name": "id",
             "in": "path",
             "required": true,
             "type": "string"
@@ -78,9 +78,9 @@
           {
             "name": "body",
             "in": "body",
-            "description": "Answer object",
+            "description": "Answer type",
             "schema": {
-              "$ref": "#/definitions/Answer"
+              "$ref": "#/definitions/AnswerType"
             }
           }
         ],
@@ -100,7 +100,7 @@
         }
       }
     },
-    "/api/answer/result": {
+    "/api/answers/result": {
       "get": {
         "tags": ["Answer"],
         "responses": {
@@ -122,7 +122,7 @@
         }
       }
     },
-    "/api/answer/delete": {
+    "/api/answers/delete": {
       "delete": {
         "tags": ["Answer"],
         "responses": {
@@ -143,6 +143,16 @@
     }
   },
   "definitions": {
+    "AnswerType": {
+      "type": "string",
+      "properties": {
+        "type": {
+          "type": "string",
+          "enum": ["extrovert", "introvert"]
+        }
+      },
+      "required": ["id", "type"]
+    },
     "Question": {
       "type": "object",
       "properties": {
@@ -172,11 +182,11 @@
           "type": "string",
           "enum": ["extrovert", "introvert"]
         },
-        "_id": {
-          "type": "string"
+        "id": {
+          "type": "integer"
         }
       },
-      "required": ["questionId", "type", "_id"]
+      "required": ["id", "type"]
     }
   }
 }
