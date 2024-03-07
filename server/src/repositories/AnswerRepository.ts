@@ -24,15 +24,15 @@ export default class AnswerRepository implements IAnswerRepositoryLayer {
     }
   };
 
-  putAnswers = async (questionId: string, type: string): Promise<void> => {
+  putAnswers = async (id: string, type: string): Promise<void> => {
     try {
-      const currentAnswer = await Answer.findOne({ questionId: questionId });
+      const currentAnswer = await Answer.findOne({ id: id });
 
       if (!currentAnswer) {
         throw new CustomError(STATUS_CODE.NOT_FOUND, "The answer is not found");
       }
 
-      await Answer.findOneAndUpdate({ questionId: questionId }, { type: type });
+      await Answer.findOneAndUpdate({ id: id }, { type: type });
     } catch (error) {
       throw new CustomError(STATUS_CODE.BAD_REQUEST, (error as Error).message);
     }

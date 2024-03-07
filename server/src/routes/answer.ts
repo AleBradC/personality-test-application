@@ -8,7 +8,7 @@ import { ANSWERS } from "../utils/messages";
 export const answerRoute = express.Router();
 const answerService = Container.get(AnswerService);
 
-answerRoute.post("/api/answer", async (req: Request, res: Response) => {
+answerRoute.post("/api/answers", async (req: Request, res: Response) => {
   try {
     const { answers } = req.body;
     await answerService.addAnswers(answers);
@@ -19,23 +19,20 @@ answerRoute.post("/api/answer", async (req: Request, res: Response) => {
   }
 });
 
-answerRoute.put(
-  "/api/answer/:questionId",
-  async (req: Request, res: Response) => {
-    try {
-      const { questionId } = req.params;
-      const { type } = req.body;
+answerRoute.put("/api/answers/:id", async (req: Request, res: Response) => {
+  try {
+    const { id } = req.params;
+    const { type } = req.body;
 
-      await answerService.updateAnswers(questionId, type);
+    await answerService.updateAnswers(type, id);
 
-      return res.status(STATUS_CODE.OK).send(ANSWERS.UPDATE);
-    } catch (error) {
-      return error;
-    }
+    return res.status(STATUS_CODE.OK).send(ANSWERS.UPDATE);
+  } catch (error) {
+    return error;
   }
-);
+});
 
-answerRoute.get("/api/answer/result", async (_req: Request, res: Response) => {
+answerRoute.get("/api/answers/result", async (_req: Request, res: Response) => {
   try {
     const result = await answerService.getResults();
 
@@ -54,7 +51,7 @@ answerRoute.get("/api/answer/result", async (_req: Request, res: Response) => {
 });
 
 answerRoute.delete(
-  "/api/answer/delete",
+  "/api/answers/delete",
   async (_req: Request, res: Response) => {
     try {
       await answerService.deleteAnswers();

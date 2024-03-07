@@ -26,7 +26,7 @@ const mockAnswerRepository = {
     ];
   },
   postAnswers: async (answer: IAnswer[]): Promise<void> => {},
-  putAnswers: async (questionId: string, type: string): Promise<void> => {},
+  putAnswers: async (id: string, type: string): Promise<void> => {},
   deleteAnswers: async (): Promise<void> => {},
 };
 
@@ -102,13 +102,13 @@ describe("AnswerService", () => {
 
   describe("PUT", () => {
     it("should handle updating answer", async () => {
-      const questionId = "1";
+      const id = "1";
       const type = "introvert";
 
       const spyFunction = sinon.spy(mockAnswerRepository, "putAnswers");
-      await answerService.updateAnswers(questionId, type);
+      await answerService.updateAnswers(id, type);
 
-      expect(spyFunction.calledOnceWithExactly(questionId, type)).to.be.true;
+      expect(spyFunction.calledOnceWithExactly(id, type)).to.be.true;
     });
 
     it("should throw an error when repository fails", async () => {

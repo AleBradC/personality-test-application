@@ -10,13 +10,13 @@ export const api = createApi({
       query: () => "/api/questions",
       providesTags: ["Question"],
     }),
-    getAnswerResult: builder.query<TestResult, void>({
-      query: () => "/api/answer/result",
+    getAnswersResult: builder.query<TestResult, void>({
+      query: () => "/api/answers/result",
       providesTags: ["Answer"],
     }),
     addAnswers: builder.mutation<void, Answer[]>({
       query: (answers) => ({
-        url: "/api/answer",
+        url: "/api/answers",
         method: "POST",
         body: {
           answers: answers,
@@ -26,7 +26,7 @@ export const api = createApi({
     }),
     deleteAllAnswers: builder.mutation<void, void>({
       query: () => ({
-        url: "/api/answer/delete",
+        url: "/api/answers/delete",
         method: "DELETE",
       }),
       invalidatesTags: ["Answer"],
@@ -36,7 +36,7 @@ export const api = createApi({
 
 export const {
   useGetQuestionsQuery,
-  useGetAnswerResultQuery,
+  useGetAnswersResultQuery,
   useAddAnswersMutation,
   useDeleteAllAnswersMutation,
 } = api;

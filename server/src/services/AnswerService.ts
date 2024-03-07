@@ -29,9 +29,9 @@ export default class AnswerService implements IAnswerService {
     }
   };
 
-  updateAnswers = async (questionId: string, type: string): Promise<void> => {
+  updateAnswers = async (id: string, type: string): Promise<void> => {
     try {
-      await this.repository.putAnswers(questionId, type);
+      await this.repository.putAnswers(id, type);
     } catch (error) {
       throw new CustomError(STATUS_CODE.BAD_REQUEST, (error as Error).message);
     }
