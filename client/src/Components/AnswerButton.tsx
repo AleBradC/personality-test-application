@@ -6,28 +6,28 @@ export interface AnswerButtonProps
   children: string | ReactNode | any;
   className?: string;
   isLoading?: boolean;
-  isSelected?: boolean;
+  selected: any;
 }
 
 const AnswerButton: React.FC<AnswerButtonProps> = ({
   children,
   className,
   isLoading,
-  isSelected,
+  selected,
   ...htmlButtonProps
 }) => {
   return (
     <ButtonContainer
       className={className}
+      selected={selected}
       {...htmlButtonProps}
-      isSelected={isSelected}
     >
       {children}
     </ButtonContainer>
   );
 };
 
-const ButtonContainer = styled.button<{ isSelected?: boolean }>`
+const ButtonContainer = styled.button<{ selected: boolean }>`
   padding: 10px 25px;
   min-width: 226px;
 
@@ -44,9 +44,9 @@ const ButtonContainer = styled.button<{ isSelected?: boolean }>`
   }
 
   ${(props) =>
-    props.isSelected &&
+    props.selected &&
     css`
-      border: 1px bold red;
+      border: 1px solid red;
     `}
 `;
 

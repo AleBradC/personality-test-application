@@ -12,6 +12,7 @@ import styled from "styled-components";
 const TakeTestPage: React.FC = () => {
   const { data: questions } = useGetQuestionsQuery();
   const [addAnswer] = useAddAnswersMutation();
+
   const [showModal, setShowModal] = useState(false);
   const [currentQuestion, setCurrentQuestion] = useState<Question>();
 
@@ -52,11 +53,12 @@ const TakeTestPage: React.FC = () => {
     }
   };
 
-  const handleChooseAnswer = (questionId: number, type: string) => {
+  const handleChooseAnswer = (questionId: number, type: string, id: number) => {
     dispatch(
       selectAnswer({
         questionId: questionId,
         type: type,
+        id: id,
       })
     );
   };
@@ -65,6 +67,10 @@ const TakeTestPage: React.FC = () => {
     await addAnswer(selectedAnswers);
 
     setShowModal(false);
+  };
+
+  const isSelected = (answerId: number) => {
+    return selectedAnswers.some((answer) => answer.id === answerId);
   };
 
   return (
@@ -81,16 +87,17 @@ const TakeTestPage: React.FC = () => {
           <Body>
             <QuestionContainer>{currentQuestion?.content}</QuestionContainer>
             <AnswersContainer>
-              {currentQuestion?.answers?.map(
-                (answer: QuestionAnswer, index: number) => (
-                  <AnswerButton
-                    onClick={() => handleChooseAnswer(currentStep, answer.type)}
-                    key={index}
-                  >
-                    {answer.content}
-                  </AnswerButton>
-                )
-              )}
+              {currentQuestion?.answers?.map((answer: QuestionAnswer) => (
+                <AnswerButton
+                  onClick={() =>
+                    handleChooseAnswer(currentStep, answer.type, answer.id)
+                  }
+                  key={answer.id}
+                  selected={isSelected(answer.id)}
+                >
+                  {answer.content}
+                </AnswerButton>
+              ))}
             </AnswersContainer>
           </Body>
         }
