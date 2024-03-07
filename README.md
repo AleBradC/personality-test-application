@@ -1,4 +1,6 @@
-# Authentication app
+# Personality app
+
+This is a personality test app.
 
 ## Dependencies
 
@@ -31,7 +33,7 @@ Frontend:
 3. Create an `.env` file in the server directory and add the following:
 
    ```env
-    PORT=8080
+    PORT=8000
    ```
 
 4. Run `npm start`, to run server & client or you can run `npm run server` to run the server or `npm run client` to run only the client

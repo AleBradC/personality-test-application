@@ -10,7 +10,7 @@ export interface ModalProps {
   onClose: () => void;
 }
 
-export const Modal: React.FC<ModalProps> = ({
+const Modal: React.FC<ModalProps> = ({
   header,
   body,
   footer,
@@ -111,3 +111,5 @@ const Footer = styled.div`
   width: 100%;
   border-top: 1px solid ${(props) => props.theme.colors.beige};
 `;
+
+export default Modal;

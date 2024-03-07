@@ -7,7 +7,7 @@ import QuestionService from "../services/QuestionService";
 export const questionRoute = express.Router();
 const questionService = Container.get(QuestionService);
 
-questionRoute.get("/api/question", async (_req: Request, res: Response) => {
+questionRoute.get("/api/questions", async (_req: Request, res: Response) => {
   try {
     const questions = await questionService.getAllQuestions();
 

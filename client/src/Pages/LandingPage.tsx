@@ -1,11 +1,18 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 import logoImg from "../assets/logo.svg";
 import landingPageImg from "../assets/landing-page.png";
-
-import { BasicButton } from "../Components/BasicButton";
+import { takeTestPageRoute } from "../routes";
+import BasicButton from "../components/BasicButton";
 import styled from "styled-components";
 
 const LandingPage: React.FC = () => {
+  const navigateTo = useNavigate();
+
+  const redirectToTakeTestPage = () => {
+    navigateTo(takeTestPageRoute);
+  };
+
   return (
     <Container>
       <Header>
@@ -21,7 +28,9 @@ const LandingPage: React.FC = () => {
             A personality test to know yourself and to enhance your life and
             relationships.
           </SubTitle>
-          <StyledBasicButton> Test your personality </StyledBasicButton>
+          <StyledBasicButton onClick={redirectToTakeTestPage}>
+            Test your personality
+          </StyledBasicButton>
         </RightContent>
       </Content>
       <Footer>&copy; 2024 Personality test</Footer>

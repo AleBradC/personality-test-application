@@ -8,7 +8,7 @@ export interface ButtonProps
   isLoading?: boolean;
 }
 
-export const BasicButton: React.FC<ButtonProps> = ({
+const BasicButton: React.FC<ButtonProps> = ({
   children,
   className,
   isLoading,
@@ -37,3 +37,5 @@ const ButtonContainer = styled.button`
     cursor: not-allowed;
   }
 `;
+
+export default BasicButton;

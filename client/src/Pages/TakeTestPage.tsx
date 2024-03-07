@@ -1,13 +1,75 @@
-import React from "react";
+import React, { useState } from "react";
+import { useGetQuestionsQuery } from "../redux/api";
+import { Question, QuestionAnswer } from "../types";
+import Modal from "../components/Modal";
+import BasicButton from "../components/BasicButton";
+import AnswerButton from "../components/AnswerButton";
 import styled from "styled-components";
 
 const TakeTestPage: React.FC = () => {
+  const {
+    data: questions,
+    isLoading,
+    isFetching,
+    isError,
+  } = useGetQuestionsQuery();
+
+  const [showModal, setShowModal] = useState(false);
+  const [currentStep, setCurrentStep] = useState(0);
+
+  if (!questions) {
+    return null;
+  }
+
+  const handleNextQuestion = () => {
+    if (currentStep < questions.length - 1) {
+      setCurrentStep(currentStep + 1);
+    }
+  };
+
+  const handlePrevQuestion = () => {
+    if (currentStep > 0) {
+      setCurrentStep(currentStep - 1);
+    }
+  };
+
   return (
     <Container>
-      <Header>PERSONALITY TEST</Header>
-      <SubHeader>PERSONALITY TEST</SubHeader>
-      <Button>PERSONALITY TEST</Button>
-      <Footer>PERSONALITY TEST</Footer>
+      <BasicButton onClick={() => setShowModal(true)}>
+        Start your test
+      </BasicButton>
+      <Modal
+        showModal={showModal}
+        header={
+          <HeaderContainer>
+            Question {currentStep + 1} / {questions.length}
+          </HeaderContainer>
+        }
+        body={questions.map((question: Question) => (
+          <Body key={question.id}>
+            <QuestionContainer>{question.content}</QuestionContainer>
+            <AnswersContainer>
+              {question.answers.map((answer: QuestionAnswer, index: number) => (
+                <AnswerButton key={index}>{answer.content}</AnswerButton>
+              ))}
+            </AnswersContainer>
+          </Body>
+        ))}
+        footer={
+          <Footer>
+            <BasicButton
+              onClick={handlePrevQuestion}
+              disabled={currentStep === 0}
+            >
+              Prev question
+            </BasicButton>
+            <BasicButton onClick={handleNextQuestion}>
+              {currentStep === questions.length - 1 ? "Submit" : "Next"}
+            </BasicButton>
+          </Footer>
+        }
+        onClose={() => setShowModal(false)}
+      />
     </Container>
   );
 };
@@ -20,41 +82,19 @@ const Container = styled.div`
   height: 100vh;
 `;
 
-const Header = styled.h1`
-  font-size: 2rem;
-  margin-bottom: 1rem;
-`;
-
-const SubHeader = styled.h2`
-  font-size: 1.5rem;
-  margin-bottom: 1rem;
-`;
-
-const Button = styled.button`
-  background-color: #007bff;
-  color: white;
-  font-size: 1rem;
-  padding: 10px 20px;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
-
-  &:hover {
-    background-color: #0056b3;
-  }
-
-  &:focus {
-    outline: none;
-    box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.3);
-  }
-`;
-
-const Footer = styled.footer`
-  background-color: #f8f9fa;
-  padding: 20px;
+const HeaderContainer = styled.div`
   width: 100%;
-  text-align: center;
+`;
+
+const Body = styled.div``;
+const QuestionContainer = styled.div``;
+const AnswersContainer = styled.div``;
+
+const Footer = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  padding: 20px;
 `;
 
 export default TakeTestPage;
