@@ -3,6 +3,7 @@ import { useAppDispatch, useAppSelector } from "../redux/hooks";
 import { useAddAnswersMutation, useGetQuestionsQuery } from "../redux/api";
 import { Answer, Question, QuestionAnswer } from "../types";
 import { selectAnswer } from "../redux/reducers/answerSlice";
+import { setCurrentStep } from "../redux/reducers/stepSlice";
 import Modal from "../components/Modal";
 import BasicButton from "../components/BasicButton";
 import AnswerButton from "../components/AnswerButton";
@@ -11,23 +12,25 @@ import styled from "styled-components";
 const TakeTestPage: React.FC = () => {
   const { data: questions } = useGetQuestionsQuery();
   const [addAnswer] = useAddAnswersMutation();
+  const [showModal, setShowModal] = useState(false);
+  const [currentQuestion, setCurrentQuestion] = useState<Question>();
 
   const dispatch = useAppDispatch();
   const selectedAnswers: Answer[] = useAppSelector(
     (state) => state.answerSlice.answers
   );
-
-  const [showModal, setShowModal] = useState(false);
-  const [currentStep, setCurrentStep] = useState(0);
-  const [currentQuestion, setCurrentQuestion] = useState<Question>();
+  const currentStep: number = useAppSelector(
+    (state) => state.stepSlice.currentStep
+  );
 
   useEffect(() => {
-    questions?.filter((question) => {
-      if (question.id === currentStep) {
-        setCurrentQuestion(question);
-      }
-    });
-  }, [currentStep]);
+    if (questions && currentStep) {
+      const question = questions.find(
+        (question) => question.id === currentStep
+      );
+      setCurrentQuestion(question);
+    }
+  }, [currentStep, questions]);
 
   if (!questions) {
     return null;
@@ -35,18 +38,17 @@ const TakeTestPage: React.FC = () => {
 
   const handleOpenTest = () => {
     setShowModal(true);
-    setCurrentStep(1);
   };
 
   const handleNextQuestion = () => {
     if (currentStep < questions.length) {
-      setCurrentStep(currentStep + 1);
+      dispatch(setCurrentStep(currentStep + 1));
     }
   };
 
   const handlePrevQuestion = () => {
     if (currentStep > 0) {
-      setCurrentStep(currentStep - 1);
+      dispatch(setCurrentStep(currentStep - 1));
     }
   };
 
@@ -128,8 +130,16 @@ const HeaderContainer = styled.div`
 `;
 
 const Body = styled.div``;
-const QuestionContainer = styled.div``;
-const AnswersContainer = styled.div``;
+
+const QuestionContainer = styled.div`
+  padding: 20px;
+`;
+
+const AnswersContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+`;
 
 const Footer = styled.div`
   display: flex;
