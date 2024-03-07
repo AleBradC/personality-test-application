@@ -11,18 +11,21 @@ const mockAnswerRepository = {
       {
         questionId: "1",
         type: "extrovert",
+        id: 1,
       },
       {
         questionId: "2",
         type: "extrovert",
+        id: 3,
       },
       {
         questionId: "3",
         type: "introvert",
+        id: 5,
       },
     ];
   },
-  postAnswers: async (details: IAnswer): Promise<void> => {},
+  postAnswers: async (answer: IAnswer[]): Promise<void> => {},
   putAnswers: async (questionId: string, type: string): Promise<void> => {},
   deleteAnswers: async (): Promise<void> => {},
 };
@@ -60,14 +63,17 @@ describe("AnswerService", () => {
 
   describe("POST", () => {
     it("should handle adding answers", async () => {
-      const details: IAnswer = {
-        questionId: "4",
-        type: "introvert",
-      };
+      const answers: IAnswer[] = [
+        {
+          questionId: "4",
+          type: "introvert",
+          id: 1,
+        },
+      ];
       const spyFunction = sinon.spy(mockAnswerRepository, "postAnswers");
-      await answerService.addAnswers(details);
+      await answerService.addAnswers(answers);
 
-      expect(spyFunction.calledOnceWithExactly(details)).to.be.true;
+      expect(spyFunction.calledOnceWithExactly(answers)).to.be.true;
     });
 
     it("should throw an error when repository fails", async () => {
@@ -77,13 +83,16 @@ describe("AnswerService", () => {
         },
       });
 
-      const details: IAnswer = {
-        questionId: "4",
-        type: "introvert",
-      };
+      const answers: IAnswer[] = [
+        {
+          questionId: "4",
+          type: "introvert",
+          id: 1,
+        },
+      ];
 
       try {
-        await answerService.addAnswers(details);
+        await answerService.addAnswers(answers);
         throw new Error("Expected error but got success");
       } catch (error) {
         expect(error).to.be.an.instanceOf(Error);

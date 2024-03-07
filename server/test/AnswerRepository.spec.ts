@@ -2,6 +2,7 @@ import { expect } from "chai";
 import sinon from "sinon";
 import Answer from "../src/models/Answer";
 import AnswerRepository from "../src/repositories/AnswerRepository";
+import { IAnswer } from "src/interfaces/common";
 
 describe("AnswerRepository", () => {
   describe("find", () => {
@@ -20,19 +21,20 @@ describe("AnswerRepository", () => {
   });
 
   describe("create", () => {
-    it("should create a new answer", async () => {
-      const details = { questionId: "1", type: "extrovert" };
+    it("should add answers", async () => {
+      const answers: IAnswer[] = [
+        {
+          questionId: "2",
+          type: "introvert",
+          id: 1,
+        },
+      ];
       const createStub = sinon.stub(Answer, "create").resolves();
 
       const answerRepository = new AnswerRepository();
-      await answerRepository.postAnswers(details);
+      await answerRepository.postAnswers(answers);
 
-      expect(
-        createStub.calledOnceWithExactly({
-          questionId: details.questionId,
-          type: details.type,
-        })
-      ).to.be.true;
+      expect(createStub.calledOnceWithExactly(answers)).to.be.true;
     });
   });
 
