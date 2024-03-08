@@ -28,25 +28,25 @@ const AnswerButton: React.FC<AnswerButtonProps> = ({
 };
 
 const ButtonContainer = styled.button<{ selected: boolean }>`
-  padding: 10px 25px;
+  padding: 14px 25px;
   min-width: 226px;
-
   border: none;
   font-family: "Montserrat", sans-serif;
-  font-weight: bolder;
   letter-spacing: 1px;
+  background: ${(props) => props.theme.colors.grey};
+  border: 1px solid ${(props) => props.theme.colors.grey2};
 
-  :hover {
-  }
-
-  :disabled {
-    cursor: not-allowed;
+  &:hover {
+    background: ${(props) => props.theme.colors.blue};
+    color: ${(props) => props.theme.colors.greyDarker};
   }
 
   ${(props) =>
     props.selected &&
     css`
-      border: 1px solid red;
+      border: 1px solid ${(props) => props.theme.colors.blue};
+      color: ${(props) => props.theme.colors.blue};
+      font-weight: bold;
     `}
 `;
 

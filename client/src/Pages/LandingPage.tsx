@@ -1,108 +1,111 @@
-import React from "react";
-import { useNavigate } from "react-router-dom";
-import logoImg from "../assets/logo.svg";
-import landingPageImg from "../assets/landing-page.png";
-import { takeTestPageRoute } from "../routes";
-import BasicButton from "../components/BasicButton";
+import React, { useState } from "react";
+import landingPageMascot from "../assets/landing-page-mascot.svg";
+
+import BasicButton from "../components/Button";
+import ModalTest from "../components/ModalTest";
+import {
+  PersonalityType,
+  PersonalityTypeVariants,
+} from "../components/PersonalityType";
 import styled from "styled-components";
 
 const LandingPage: React.FC = () => {
-  const navigateTo = useNavigate();
+  const [showModal, setShowModal] = useState(false);
 
-  const redirectToTakeTestPage = () => {
-    navigateTo(takeTestPageRoute);
+  const handleOpenTest = () => {
+    setShowModal(true);
   };
 
   return (
     <Container>
-      <Header>
-        <Logo src={logoImg} />
-      </Header>
-      <Content>
-        <LeftContent>
-          <Image src={landingPageImg} />
-        </LeftContent>
-        <RightContent>
+      <UpperContainer>
+        <LeftContainer>
           <Title> Discover who you truly are </Title>
           <SubTitle>
             A personality test to know yourself and to enhance your life and
             relationships.
           </SubTitle>
-          <StyledBasicButton onClick={redirectToTakeTestPage}>
-            Test your personality
-          </StyledBasicButton>
-        </RightContent>
-      </Content>
-      <Footer>&copy; 2024 Personality test</Footer>
+          <BasicButton onClick={handleOpenTest}>Start your test</BasicButton>
+          <ModalTest showModal={showModal} setShowModal={setShowModal} />
+        </LeftContainer>
+        <RightContainer>
+          <Image src={landingPageMascot} />
+        </RightContainer>
+      </UpperContainer>
+      <LowerContainer>
+        <Title> Find out if you are an introvert or extrovert </Title>
+        <TypeContainer>
+          <PersonalityType
+            variant={PersonalityTypeVariants.INTROVERT}
+            name={"Introvert"}
+          />
+          <PersonalityType
+            variant={PersonalityTypeVariants.EXTROVERT}
+            name={"Extrovert"}
+          />
+        </TypeContainer>
+      </LowerContainer>
     </Container>
   );
 };
 
 const Container = styled.div`
   display: flex;
-  flex-direction: column;
   align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: 20px;
+  background-color: ${(props) => props.theme.colors.black};
   height: 100vh;
-  background-color: ${(props) => props.theme.colors.white2};
+  width: 100%;
 `;
 
-const Header = styled.div`
+const UpperContainer = styled.div`
+  display: flex;
+`;
+
+const LeftContainer = styled.div`
   display: flex;
   flex-direction: column;
   align-items: flex-start;
   justify-content: center;
-  width: 100%;
-  height: 90px;
-  border-bottom: solid 1px blue;
-  padding: 0px 20px;
-`;
-
-const Logo = styled.img`
-  width: 250px;
-  height: 88px;
-`;
-
-const Content = styled.div`
-  display: flex;
-`;
-
-const LeftContent = styled.div`
-  flex: 1;
+  width: 400px;
+  height: 320px;
 `;
 
 const Image = styled.img`
-  width: 100%;
+  width: 320px;
+  height: 320px;
 `;
 
-const RightContent = styled.div`
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  justify-content: center;
-  padding: 30px 30px 30px 80px;
-`;
+const RightContainer = styled.div``;
 
 const Title = styled.h1`
-  font-size: 46px;
-  font-family: Newsreader Display, sans-serif;
+  font-size: 32px;
+  font-family: "Madimi One", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+  color: ${(props) => props.theme.colors.white};
 `;
 
 const SubTitle = styled.p`
-  font-size: 28px;
-  font-family: Kumbh Sans, sans-serif;
+  font-size: 18px;
+  font-family: "Madimi One", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+  color: ${(props) => props.theme.colors.white};
 `;
 
-const StyledBasicButton = styled(BasicButton)`
+const LowerContainer = styled.div`
   display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
 `;
 
-const Footer = styled.footer`
-  background-color: #f8f9fa;
-  padding: 20px;
-  width: 100%;
-  text-align: center;
-  margin-top: auto;
+const TypeContainer = styled.div`
+  display: flex;
+  gap: 30px;
 `;
 
 export default LandingPage;

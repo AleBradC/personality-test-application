@@ -1,5 +1,6 @@
 import React, { ReactNode } from "react";
 import ReactDOM from "react-dom";
+import icon from "../assets/x.svg";
 import styled, { css } from "styled-components";
 
 export interface ModalProps {
@@ -29,9 +30,7 @@ const Modal: React.FC<ModalProps> = ({
           <Container>
             <Header>
               {header}
-              <CloseButton type="button" onClick={onClose}>
-                X
-              </CloseButton>
+              <CloseButton src={icon} onClick={onClose} />
             </Header>
             <Body> {body} </Body>
             <Footer> {footer} </Footer>
@@ -52,7 +51,7 @@ const BlurWrapper = styled.div`
   height: 100%;
   overflow: hidden;
   z-index: ${(props) => props.theme.zIndex.others};
-  backdrop-filter: blur(32px);
+  backdrop-filter: blur(42px);
 `;
 
 const Container = styled.div`
@@ -69,12 +68,11 @@ const Container = styled.div`
   margin: auto;
   max-width: 660px;
   width: 100%;
-  height: 660px;
+  height: 500px;
   padding: 20px;
   box-shadow: 0 5px 10px 2px rgba(195, 192, 192, 0.5);
-
+  background: ${(props) => props.theme.colors.grey};
   border-radius: 4px;
-
   z-index: ${(props) => props.theme.zIndex.header};
 `;
 
@@ -85,18 +83,16 @@ const Header = styled.div`
   width: 100%;
 `;
 
-const CloseButton = styled.button`
+const CloseButton = styled.img`
   position: absolute;
   top: 12px;
-  right: 6px;
+  right: 18px;
   display: flex;
   border: none;
   background: none;
-`;
-
-const Icon = styled.img`
   height: 20px;
   width: 20px;
+  cursor: pointer;
 `;
 
 const Body = styled.div`
@@ -104,12 +100,12 @@ const Body = styled.div`
   flex-direction: column;
   flex-grow: 1;
   width: 100%;
-  border-top: 1px solid ${(props) => props.theme.colors.beige};
+  border-top: 1px solid ${(props) => props.theme.colors.black};
 `;
 
 const Footer = styled.div`
   width: 100%;
-  border-top: 1px solid ${(props) => props.theme.colors.beige};
+  border-top: 1px solid ${(props) => props.theme.colors.black};
 `;
 
 export default Modal;

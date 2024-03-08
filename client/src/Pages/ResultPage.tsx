@@ -1,11 +1,16 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
-import { takeTestPageRoute } from "../routes";
 import {
   useDeleteAllAnswersMutation,
   useGetAnswersResultQuery,
 } from "../redux/api";
-import BasicButton from "../components/BasicButton";
+import { landingPageRoute } from "../routes";
+import {
+  PersonalityType,
+  PersonalityTypeVariants,
+} from "../components/PersonalityType";
+import BasicButton from "../components/Button";
+import content from "../content.json";
 import styled from "styled-components";
 
 const ResultPage: React.FC = () => {
@@ -13,12 +18,8 @@ const ResultPage: React.FC = () => {
   const { data } = useGetAnswersResultQuery();
   const [deleteAllAnswers, { isSuccess }] = useDeleteAllAnswersMutation();
 
-  const redirectToTakeTestPage = () => {
-    navigateTo(takeTestPageRoute);
-  };
-
   if (isSuccess) {
-    redirectToTakeTestPage();
+    navigateTo(landingPageRoute);
   }
 
   const handleRetryTest = async () => {
@@ -27,31 +28,78 @@ const ResultPage: React.FC = () => {
 
   return (
     <Container>
-      <div> {data?.result} </div>
-
-      <div>
-        <p> Reset and retry </p>
-        <BasicButton onClick={handleRetryTest}> Retry </BasicButton>
-      </div>
-      <Footer>&copy; 2024 Personality test</Footer>
+      <UpperContainer>
+        <Title> Congratulation! </Title>
+        <SubTitle>You are an: {data?.result}</SubTitle>
+        <PersonalityType
+          variant={
+            data?.result === "introvert"
+              ? PersonalityTypeVariants.INTROVERT
+              : PersonalityTypeVariants.EXTROVERT
+          }
+        />
+      </UpperContainer>
+      <LowerContainer>
+        <Content>
+          {data?.result === "introvert"
+            ? content.content.introvert
+            : content.content.extrovert}
+        </Content>
+        <BasicButton onClick={handleRetryTest}>Retry</BasicButton>
+      </LowerContainer>
     </Container>
   );
 };
 
 const Container = styled.div`
   display: flex;
-  flex-direction: column;
   align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: 30px;
+  background-color: ${(props) => props.theme.colors.black};
   height: 100vh;
-  background-color: ${(props) => props.theme.colors.white2};
+  width: 100%;
 `;
 
-const Footer = styled.footer`
-  background-color: #f8f9fa;
-  padding: 20px;
-  width: 100%;
-  text-align: center;
-  margin-top: auto;
+const UpperContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+`;
+
+const Title = styled.h1`
+  font-size: 46px;
+  font-family: "Madimi One", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+  color: ${(props) => props.theme.colors.white};
+  margin: 10px;
+`;
+
+const SubTitle = styled.p`
+  font-size: 26px;
+  font-family: "Madimi One", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+  color: ${(props) => props.theme.colors.blue};
+  margin: 0 0 24px 0;
+`;
+
+const LowerContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 500px;
+`;
+
+const Content = styled.p`
+  font-size: 18px;
+  font-family: "Madimi One", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+  color: ${(props) => props.theme.colors.white};
 `;
 
 export default ResultPage;
