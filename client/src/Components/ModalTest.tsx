@@ -123,7 +123,12 @@ const ModalTest: React.FC<ModalTestProps> = ({ showModal, setShowModal }) => {
             Prev question
           </BasicButton>
           {currentStep === questions.length ? (
-            <BasicButton onClick={handleSubmit}> Submit </BasicButton>
+            <BasicButton
+              onClick={handleSubmit}
+              disabled={!hasSelectedAnswerForCurrentQuestion}
+            >
+              Submit
+            </BasicButton>
           ) : (
             <BasicButton
               onClick={handleNextQuestion}
