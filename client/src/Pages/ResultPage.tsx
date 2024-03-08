@@ -5,7 +5,7 @@ import {
   useGetAnswersResultQuery,
 } from "../redux/api";
 import { landingPageRoute } from "../routes";
-import BasicButton from "../components/BasicButton";
+import BasicButton from "../components/Button";
 import styled from "styled-components";
 
 const ResultPage: React.FC = () => {

@@ -8,7 +8,7 @@ export interface ButtonProps
   isLoading?: boolean;
 }
 
-const BasicButton: React.FC<ButtonProps> = ({
+const Button: React.FC<ButtonProps> = ({
   children,
   className,
   isLoading,
@@ -22,17 +22,19 @@ const BasicButton: React.FC<ButtonProps> = ({
 };
 
 const ButtonContainer = styled.button`
-  padding: 10px 25px;
-  min-width: 226px;
+  padding: 12px 32px;
+  min-width: 200px;
 
   border: none;
+  border-radius: 30px;
   font-family: "Montserrat", sans-serif;
   font-weight: bolder;
   letter-spacing: 1px;
+  background-color: ${(props) => props.theme.colors.blue};
+  transition: transform 0.3s ease;
 
   &:hover {
-    background: ${(props) => props.theme.colors.blueLight};
-    color: ${(props) => props.theme.colors.greyDarker};
+    transform: scale(1.05);
   }
 
   &:disabled {
@@ -40,4 +42,4 @@ const ButtonContainer = styled.button`
   }
 `;
 
-export default BasicButton;
+export default Button;

@@ -1,4 +1,4 @@
-import { createGlobalStyle } from 'styled-components'
+import { createGlobalStyle } from "styled-components";
 
 const FontFamily = createGlobalStyle`
   @font-face {
@@ -7,6 +7,6 @@ const FontFamily = createGlobalStyle`
   @font-face {
     font-family: 'Optima', sans-serif;
   }
-`
+`;
 
-export default FontFamily
+export default FontFamily;

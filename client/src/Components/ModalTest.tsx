@@ -7,7 +7,7 @@ import { resetAnswers, selectAnswer } from "../redux/reducers/answerSlice";
 import { resetStep, setCurrentStep } from "../redux/reducers/stepSlice";
 import { resultPage } from "../routes";
 import Modal from "./Modal";
-import BasicButton from "./BasicButton";
+import BasicButton from "./Button";
 import AnswerButton from "./AnswerButton";
 import styled from "styled-components";
 
@@ -88,71 +88,61 @@ const ModalTest: React.FC<ModalTestProps> = ({ showModal, setShowModal }) => {
   );
 
   return (
-    <Container>
-      <Modal
-        showModal={showModal}
-        header={
-          <HeaderContainer>
-            Question {currentStep} / {questions.length}
-          </HeaderContainer>
-        }
-        body={
-          <Body>
-            <QuestionContainer>{currentQuestion?.content}</QuestionContainer>
-            <AnswersContainer>
-              {currentQuestion?.answers?.map((answer: QuestionAnswer) => (
-                <AnswerButton
-                  onClick={() =>
-                    handleChooseAnswer(currentStep, answer.type, answer.id)
-                  }
-                  key={answer.id}
-                  selected={isSelected(answer.id)}
-                >
-                  {answer.content}
-                </AnswerButton>
-              ))}
-              <ErrorContainer> All questions are required </ErrorContainer>
-            </AnswersContainer>
-          </Body>
-        }
-        footer={
-          <Footer>
-            <BasicButton
-              onClick={handlePrevQuestion}
-              disabled={currentStep === 1}
-            >
-              Prev question
-            </BasicButton>
-            {currentStep === questions.length ? (
-              <BasicButton onClick={handleSubmit}> Submit </BasicButton>
-            ) : (
-              <BasicButton
-                onClick={handleNextQuestion}
-                disabled={!hasSelectedAnswerForCurrentQuestion}
+    <Modal
+      showModal={showModal}
+      header={
+        <HeaderContainer>
+          Question {currentStep} / {questions.length}
+        </HeaderContainer>
+      }
+      body={
+        <Body>
+          <QuestionContainer>{currentQuestion?.content}</QuestionContainer>
+          <AnswersContainer>
+            {currentQuestion?.answers?.map((answer: QuestionAnswer) => (
+              <AnswerButton
+                onClick={() =>
+                  handleChooseAnswer(currentStep, answer.type, answer.id)
+                }
+                key={answer.id}
+                selected={isSelected(answer.id)}
               >
-                Next question
-              </BasicButton>
-            )}
-          </Footer>
-        }
-        onClose={() => setShowModal(false)}
-      />
-    </Container>
+                {answer.content}
+              </AnswerButton>
+            ))}
+            <ErrorContainer> All questions are required </ErrorContainer>
+          </AnswersContainer>
+        </Body>
+      }
+      footer={
+        <Footer>
+          <BasicButton
+            onClick={handlePrevQuestion}
+            disabled={currentStep === 1}
+          >
+            Prev question
+          </BasicButton>
+          {currentStep === questions.length ? (
+            <BasicButton onClick={handleSubmit}> Submit </BasicButton>
+          ) : (
+            <BasicButton
+              onClick={handleNextQuestion}
+              disabled={!hasSelectedAnswerForCurrentQuestion}
+            >
+              Next question
+            </BasicButton>
+          )}
+        </Footer>
+      }
+      onClose={() => setShowModal(false)}
+    />
   );
 };
-
-const Container = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  height: 100vh;
-`;
 
 const HeaderContainer = styled.div`
   width: 100%;
   padding: 20px 20px 20px 0;
-  font-family: Kumbh Sans, sans-serif;
+  font-family: "Montserrat", sans-serif;
   font-size: 14px;
 `;
 
@@ -165,13 +155,11 @@ const Body = styled.div`
 
 const QuestionContainer = styled.div`
   padding: 20px 20px 20px 0;
-  font-family: Newsreader Display, sans-serif;
   line-height: 23px;
   font-size: 18px;
 `;
 
 const ErrorContainer = styled.div`
-  font-family: Newsreader Display, sans-serif;
   font-style: italic;
 `;
 

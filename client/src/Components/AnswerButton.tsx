@@ -32,7 +32,6 @@ const ButtonContainer = styled.button<{ selected: boolean }>`
   min-width: 226px;
 
   border: none;
-  font-family: "Montserrat", sans-serif;
   font-weight: bolder;
   letter-spacing: 1px;
 
