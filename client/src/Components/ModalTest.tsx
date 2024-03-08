@@ -142,8 +142,10 @@ const ModalTest: React.FC<ModalTestProps> = ({ showModal, setShowModal }) => {
 const HeaderContainer = styled.div`
   width: 100%;
   padding: 20px 20px 20px 0;
-  font-family: "Montserrat", sans-serif;
   font-size: 14px;
+  font-family: "Montserrat", sans-serif;
+  font-style: italic;
+  color: ${(props) => props.theme.colors.greyDarker};
 `;
 
 const Body = styled.div`
@@ -157,6 +159,7 @@ const QuestionContainer = styled.div`
   padding: 20px 20px 20px 0;
   line-height: 23px;
   font-size: 18px;
+  font-family: "Montserrat", sans-serif;
 `;
 
 const ErrorContainer = styled.div`

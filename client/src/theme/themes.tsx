@@ -3,6 +3,9 @@ export const theme = {
     white: "#FFF",
     black: "#000",
     blue: "rgb(78,220,216)",
+    greyDarker: "#505050",
+    grey: "#f5f7f9",
+    grey2: "#ccd6e0",
   },
   zIndex: {
     header: 100,

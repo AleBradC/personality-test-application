@@ -5,7 +5,7 @@ const FontFamily = createGlobalStyle`
     font-family: 'Montserrat', sans-serif;
   }  
   @font-face {
-    font-family: 'Optima', sans-serif;
+    font-family: "Madimi One", sans-serif;
   }
 `;
 
