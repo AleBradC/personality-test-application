@@ -1,10 +1,12 @@
 import React, { useState } from "react";
 import landingPageMascot from "../assets/landing-page-mascot.svg";
-import introvertImg from "../assets/introvert-mascot.svg";
-import extrovertImg from "../assets/extrovert-mascot.svg";
+
 import BasicButton from "../components/Button";
 import ModalTest from "../components/ModalTest";
-import PersonalityType from "../components/PersonalityType";
+import {
+  PersonalityType,
+  PersonalityTypeVariants,
+} from "../components/PersonalityType";
 import styled from "styled-components";
 
 const LandingPage: React.FC = () => {
@@ -17,7 +19,7 @@ const LandingPage: React.FC = () => {
   return (
     <Container>
       <UpperContainer>
-        <LeftContent>
+        <LeftContainer>
           <Title> Discover who you truly are </Title>
           <SubTitle>
             A personality test to know yourself and to enhance your life and
@@ -25,16 +27,22 @@ const LandingPage: React.FC = () => {
           </SubTitle>
           <BasicButton onClick={handleOpenTest}>Start your test</BasicButton>
           <ModalTest showModal={showModal} setShowModal={setShowModal} />
-        </LeftContent>
-        <RightContent>
+        </LeftContainer>
+        <RightContainer>
           <Image src={landingPageMascot} />
-        </RightContent>
+        </RightContainer>
       </UpperContainer>
       <LowerContainer>
         <Title> Find out if you are an introvert or extrovert </Title>
         <TypeContainer>
-          <PersonalityType image={introvertImg} name={"Introvert"} />
-          <PersonalityType image={extrovertImg} name={"Extrovert"} />
+          <PersonalityType
+            variant={PersonalityTypeVariants.INTROVERT}
+            name={"Introvert"}
+          />
+          <PersonalityType
+            variant={PersonalityTypeVariants.EXTROVERT}
+            name={"Extrovert"}
+          />
         </TypeContainer>
       </LowerContainer>
     </Container>
@@ -56,7 +64,7 @@ const UpperContainer = styled.div`
   display: flex;
 `;
 
-const LeftContent = styled.div`
+const LeftContainer = styled.div`
   display: flex;
   flex-direction: column;
   align-items: flex-start;
@@ -70,7 +78,7 @@ const Image = styled.img`
   height: 320px;
 `;
 
-const RightContent = styled.div``;
+const RightContainer = styled.div``;
 
 const Title = styled.h1`
   font-size: 32px;

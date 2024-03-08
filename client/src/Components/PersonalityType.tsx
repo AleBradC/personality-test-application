@@ -1,15 +1,30 @@
 import React from "react";
 import styled from "styled-components";
+import extrovertImg from "../assets/extrovert-mascot.svg";
+import introvertImg from "../assets/introvert-mascot.svg";
 
-interface PersonalityTypeProps {
-  name: string;
-  image: string;
+export enum PersonalityTypeVariants {
+  INTROVERT = "INTROVERT",
+  EXTROVERT = "EXTROVERT",
 }
 
-const PersonalityType: React.FC<PersonalityTypeProps> = ({ name, image }) => {
+const variantType = {
+  [PersonalityTypeVariants.EXTROVERT]: extrovertImg,
+  [PersonalityTypeVariants.INTROVERT]: introvertImg,
+};
+
+interface PersonalityTypeProps {
+  name?: string;
+  variant: PersonalityTypeVariants;
+}
+
+export const PersonalityType: React.FC<PersonalityTypeProps> = ({
+  name,
+  variant,
+}) => {
   return (
     <Container>
-      <Image src={image} alt={name} />
+      <Image src={variantType[variant]} alt={name} />
       <Name>{name}</Name>
     </Container>
   );
@@ -23,7 +38,7 @@ const Container = styled.div`
 
 const Image = styled.img`
   width: 100px;
-  height: 100px;
+  height: 140px;
   object-fit: cover;
 `;
 
@@ -33,5 +48,3 @@ const Name = styled.h2`
   color: ${(props) => props.theme.colors.white};
   font-family: "Montserrat", sans-serif;
 `;
-
-export default PersonalityType;
