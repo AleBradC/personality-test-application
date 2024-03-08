@@ -7,7 +7,7 @@ import { resetAnswers, selectAnswer } from "../redux/reducers/answerSlice";
 import { resetStep, setCurrentStep } from "../redux/reducers/stepSlice";
 import { resultPage } from "../routes";
 import Modal from "./Modal";
-import BasicButton from "./Button";
+import Button from "./Button";
 import AnswerButton from "./AnswerButton";
 import styled from "styled-components";
 
@@ -116,26 +116,23 @@ const ModalTest: React.FC<ModalTestProps> = ({ showModal, setShowModal }) => {
       }
       footer={
         <Footer>
-          <BasicButton
-            onClick={handlePrevQuestion}
-            disabled={currentStep === 1}
-          >
+          <Button onClick={handlePrevQuestion} disabled={currentStep === 1}>
             Prev question
-          </BasicButton>
+          </Button>
           {currentStep === questions.length ? (
-            <BasicButton
+            <Button
               onClick={handleSubmit}
               disabled={!hasSelectedAnswerForCurrentQuestion}
             >
               Submit
-            </BasicButton>
+            </Button>
           ) : (
-            <BasicButton
+            <Button
               onClick={handleNextQuestion}
               disabled={!hasSelectedAnswerForCurrentQuestion}
             >
               Next question
-            </BasicButton>
+            </Button>
           )}
         </Footer>
       }

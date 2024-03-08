@@ -5,6 +5,7 @@ import {
   useGetAnswersResultQuery,
 } from "../redux/api";
 import { landingPageRoute } from "../routes";
+import { PERSONALITY_TYPE } from "../constants";
 import {
   PersonalityType,
   PersonalityTypeVariants,
@@ -29,11 +30,13 @@ const ResultPage: React.FC = () => {
   return (
     <Container>
       <UpperContainer>
-        <Title> Congratulation! </Title>
-        <SubTitle>You are an: {data?.result}</SubTitle>
+        <Title> {content.resultPage.title} </Title>
+        <SubTitle>
+          {content.resultPage.result} {data?.result}
+        </SubTitle>
         <PersonalityType
           variant={
-            data?.result === "introvert"
+            data?.result === PERSONALITY_TYPE.INTROVERT
               ? PersonalityTypeVariants.INTROVERT
               : PersonalityTypeVariants.EXTROVERT
           }
@@ -41,11 +44,13 @@ const ResultPage: React.FC = () => {
       </UpperContainer>
       <LowerContainer>
         <Content>
-          {data?.result === "introvert"
-            ? content.content.introvert
-            : content.content.extrovert}
+          {data?.result === PERSONALITY_TYPE.INTROVERT
+            ? content.resultPage.introvert
+            : content.resultPage.extrovert}
         </Content>
-        <BasicButton onClick={handleRetryTest}>Retry</BasicButton>
+        <BasicButton onClick={handleRetryTest}>
+          {content.resultPage.buttons.retry}
+        </BasicButton>
       </LowerContainer>
     </Container>
   );

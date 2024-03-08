@@ -1,6 +1,19 @@
 {
-  "content": {
+  "landingPage": {
+    "title": "Discover who you truly are",
+    "subtitle": "A personality test to know yourself and to enhance your life and relationships.",
+    "title2": "Find out if you are an introvert or extrovert",
+    "buttons": {
+      "start": "Start your test"
+    }
+  },
+  "resultPage": {
+    "title": "Congratulation!",
+    "result": "You are an:",
     "introvert": "Introversion refers to the tendency to focus more on inner experiences such as your own feelings and thoughts than outer ones. Introverts are typically more intrinsically motivated, self-reliant, guarded, and introspective than extroverts. Some may be shy and socially anxious. Others simply prefer spending time alone.",
-    "extrovert": "The term extroversion describes an aspect of a personality that is often characterized by expressive and outgoing patterns of behavior. People who are extroverts tend to be very talkative, sociable, active, and warm. Jung defined an extrovert as someone who feels energized by the external world and social interactions."
+    "extrovert": "The term extroversion describes an aspect of a personality that is often characterized by expressive and outgoing patterns of behavior. People who are extroverts tend to be very talkative, sociable, active, and warm. Jung defined an extrovert as someone who feels energized by the external world and social interactions.",
+    "buttons": {
+      "retry": "Retry"
+    }
   }
 }
