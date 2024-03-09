@@ -21,7 +21,6 @@ Frontend:
 - Redux Toolkit query
 - React router
 - Styled Components
-- Jest & React testing library
 
 ## Description
 
