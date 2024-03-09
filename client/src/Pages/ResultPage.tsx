@@ -5,18 +5,21 @@ import {
   useGetAnswersResultQuery,
 } from "../redux/api";
 import { landingPageRoute } from "../routes";
+import { PERSONALITY_TYPE } from "../constants";
 import {
   PersonalityType,
   PersonalityTypeVariants,
 } from "../components/PersonalityType";
 import BasicButton from "../components/Button";
+import Loading from "../components/Loading";
 import content from "../content.json";
 import styled from "styled-components";
 
 const ResultPage: React.FC = () => {
   const navigateTo = useNavigate();
-  const { data } = useGetAnswersResultQuery();
-  const [deleteAllAnswers, { isSuccess }] = useDeleteAllAnswersMutation();
+  const { data, isLoading: isResultLoading } = useGetAnswersResultQuery();
+  const [deleteAllAnswers, { isSuccess, isLoading: isDeleteLoading }] =
+    useDeleteAllAnswersMutation();
 
   if (isSuccess) {
     navigateTo(landingPageRoute);
@@ -26,14 +29,20 @@ const ResultPage: React.FC = () => {
     await deleteAllAnswers();
   };
 
+  if (isResultLoading) {
+    <Loading fullScreen />;
+  }
+
   return (
     <Container>
       <UpperContainer>
-        <Title> Congratulation! </Title>
-        <SubTitle>You are an: {data?.result}</SubTitle>
+        <Title> {content.resultPage.title} </Title>
+        <SubTitle>
+          {content.resultPage.result} {data?.result}
+        </SubTitle>
         <PersonalityType
           variant={
-            data?.result === "introvert"
+            data?.result === PERSONALITY_TYPE.INTROVERT
               ? PersonalityTypeVariants.INTROVERT
               : PersonalityTypeVariants.EXTROVERT
           }
@@ -41,11 +50,13 @@ const ResultPage: React.FC = () => {
       </UpperContainer>
       <LowerContainer>
         <Content>
-          {data?.result === "introvert"
-            ? content.content.introvert
-            : content.content.extrovert}
+          {data?.result === PERSONALITY_TYPE.INTROVERT
+            ? content.resultPage.introvert
+            : content.resultPage.extrovert}
         </Content>
-        <BasicButton onClick={handleRetryTest}>Retry</BasicButton>
+        <BasicButton onClick={handleRetryTest} isLoading={isDeleteLoading}>
+          {content.resultPage.buttons.retry}
+        </BasicButton>
       </LowerContainer>
     </Container>
   );

@@ -1,12 +1,13 @@
 import React, { useState } from "react";
 import landingPageMascot from "../assets/landing-page-mascot.svg";
-
-import BasicButton from "../components/Button";
+import Button from "../components/Button";
 import ModalTest from "../components/ModalTest";
 import {
   PersonalityType,
   PersonalityTypeVariants,
 } from "../components/PersonalityType";
+import { PERSONALITY_TYPE } from "../constants";
+import content from "../content.json";
 import styled from "styled-components";
 
 const LandingPage: React.FC = () => {
@@ -20,12 +21,11 @@ const LandingPage: React.FC = () => {
     <Container>
       <UpperContainer>
         <LeftContainer>
-          <Title> Discover who you truly are </Title>
-          <SubTitle>
-            A personality test to know yourself and to enhance your life and
-            relationships.
-          </SubTitle>
-          <BasicButton onClick={handleOpenTest}>Start your test</BasicButton>
+          <Title> {content.landingPage.title} </Title>
+          <SubTitle>{content.landingPage.subtitle}</SubTitle>
+          <Button onClick={handleOpenTest}>
+            {content.landingPage.buttons.start}
+          </Button>
           <ModalTest showModal={showModal} setShowModal={setShowModal} />
         </LeftContainer>
         <RightContainer>
@@ -33,15 +33,15 @@ const LandingPage: React.FC = () => {
         </RightContainer>
       </UpperContainer>
       <LowerContainer>
-        <Title> Find out if you are an introvert or extrovert </Title>
+        <Title> {content.landingPage.title2} </Title>
         <TypeContainer>
           <PersonalityType
             variant={PersonalityTypeVariants.INTROVERT}
-            name={"Introvert"}
+            name={PERSONALITY_TYPE.INTROVERT}
           />
           <PersonalityType
             variant={PersonalityTypeVariants.EXTROVERT}
-            name={"Extrovert"}
+            name={PERSONALITY_TYPE.EXTROVERT}
           />
         </TypeContainer>
       </LowerContainer>
