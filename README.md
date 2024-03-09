@@ -48,3 +48,7 @@ This is a personality test :)
 ## Documentation
 
 http://localhost:8000/api-docs/#/
+
+## Responsiveness
+
+This is only for large desktop and small (laptops)

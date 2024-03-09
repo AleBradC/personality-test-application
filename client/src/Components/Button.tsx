@@ -1,5 +1,6 @@
 import { ReactNode } from "react";
 import styled from "styled-components";
+import Loading from "./Loading";
 
 export interface ButtonProps
   extends React.ButtonHTMLAttributes<HTMLButtonElement> {
@@ -16,7 +17,7 @@ const Button: React.FC<ButtonProps> = ({
 }) => {
   return (
     <ButtonContainer className={className} {...htmlButtonProps}>
-      {children}
+      {isLoading ? <Loading smallSpinner /> : children}
     </ButtonContainer>
   );
 };

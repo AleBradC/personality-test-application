@@ -14,6 +14,7 @@
     "extrovert": "The term extroversion describes an aspect of a personality that is often characterized by expressive and outgoing patterns of behavior. People who are extroverts tend to be very talkative, sociable, active, and warm. Jung defined an extrovert as someone who feels energized by the external world and social interactions.",
     "buttons": {
       "retry": "Retry"
-    }
+    },
+    "error": "Sorry something went wrong :("
   }
 }

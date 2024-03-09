@@ -11,13 +11,15 @@ import {
   PersonalityTypeVariants,
 } from "../components/PersonalityType";
 import BasicButton from "../components/Button";
+import Loading from "../components/Loading";
 import content from "../content.json";
 import styled from "styled-components";
 
 const ResultPage: React.FC = () => {
   const navigateTo = useNavigate();
-  const { data } = useGetAnswersResultQuery();
-  const [deleteAllAnswers, { isSuccess }] = useDeleteAllAnswersMutation();
+  const { data, isLoading: isResultLoading } = useGetAnswersResultQuery();
+  const [deleteAllAnswers, { isSuccess, isLoading: isDeleteLoading }] =
+    useDeleteAllAnswersMutation();
 
   if (isSuccess) {
     navigateTo(landingPageRoute);
@@ -26,6 +28,10 @@ const ResultPage: React.FC = () => {
   const handleRetryTest = async () => {
     await deleteAllAnswers();
   };
+
+  if (isResultLoading) {
+    <Loading fullScreen />;
+  }
 
   return (
     <Container>
@@ -48,7 +54,7 @@ const ResultPage: React.FC = () => {
             ? content.resultPage.introvert
             : content.resultPage.extrovert}
         </Content>
-        <BasicButton onClick={handleRetryTest}>
+        <BasicButton onClick={handleRetryTest} isLoading={isDeleteLoading}>
           {content.resultPage.buttons.retry}
         </BasicButton>
       </LowerContainer>
