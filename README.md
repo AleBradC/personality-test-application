@@ -1,6 +1,7 @@
 # Personality app
 
 This is a personality test app.
+The node version 18.17.0
 
 ## Dependencies
 
